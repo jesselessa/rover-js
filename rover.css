@@ -1,0 +1,57 @@
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 10px;
+}
+
+h1 {
+  min-height: 8vh;
+  margin-bottom: 20px;
+}
+
+#container-grid {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  gap: 1px;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#input-group {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 10px;
+  gap: 8px;
+}
+
+#roverInfo {
+  text-align: left;
+  padding: 0 10px;
+}
+
+.history {
+  margin-top: 10px;
+}

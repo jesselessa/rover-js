@@ -11,7 +11,7 @@ const rover = {
   travelLog: [],
 };
 
-// Initialize grid
+// Generate grid
 for (let r = 0; r < 10; r++) {
   for (let c = 0; c < 10; c++) {
     const cell = document.createElement("div");
@@ -23,8 +23,10 @@ for (let r = 0; r < 10; r++) {
 // Update grid with Rover's position
 function updateGrid() {
   const cells = document.querySelectorAll(".cell");
+  // Empty content for each cell
   cells.forEach((cell) => (cell.textContent = ""));
 
+  // Calculate the index of the cell corresponding to Rover's current position
   const roverCellIndex = rover.x * 10 + rover.y;
   cells[roverCellIndex].textContent = rover.direction;
 }
@@ -52,8 +54,11 @@ submit.addEventListener("click", submitMove);
 // Reset
 function resetGridAndInfo() {
   rover.direction = "N";
-  updateGrid();
+  rover.x = 0;
+  rover.y = 0;
   rover.travelLog = [];
+
+  updateGrid();
   updateRoverInfo();
 }
 reset.addEventListener("click", resetGridAndInfo);
@@ -98,7 +103,6 @@ function turnRight() {
   }
 }
 
-
 // Define Rover's moves
 function moveForward(rover) {
   switch (rover.direction) {
@@ -139,7 +143,6 @@ function moveForward(rover) {
       return false;
   }
 }
-moveForward(rover);
 
 function moveBackward(rover) {
   switch (rover.direction) {
@@ -181,7 +184,6 @@ function moveBackward(rover) {
       return false;
   }
 }
-moveBackward(rover);
 
 function pilotRover(move) {
   // Save current position in order to restore it in case of an invalid move
@@ -191,6 +193,7 @@ function pilotRover(move) {
   switch (move) {
     case "l":
       turnLeft();
+      rover.travelLog.push("You have turned left.");
       break;
 
     case "r":
@@ -224,15 +227,10 @@ function pilotRover(move) {
   }
 
   // Check if there is a move
-  if (rover.x !== prevX || rover.y !== prevY) {
+  if (prevX !== rover.x || prevY !== rover.y) {
     // Update grid and history if move is valid
     updateGridAndHistory(prevX, prevY, rover.x, rover.y, rover.direction);
   }
-  // else {
-  //   // Restore previous position if no valid move was made
-  //   rover.x = prevX;
-  //   rover.y = prevY;
-  // }
 }
 
 function updateGridAndHistory(prevX, prevY, newX, newY) {
@@ -250,14 +248,14 @@ function updateGridAndHistory(prevX, prevY, newX, newY) {
   }
 }
 
-function displayInitialGrid() {
+function displayInitialGrid(rover) {
   rover.direction = "N";
   updateGrid();
   updateRoverInfo();
 }
 
 // Initial display
-displayInitialGrid();
+displayInitialGrid(rover);
 
 // TODO - Comment former code and uncomment below if you want to use Rover game only with console
 // // Use "prompt" library

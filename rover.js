@@ -16,8 +16,8 @@ const grid = [
 
 const rover = {
   direction: "N",
-  x: 0,
-  y: 0,
+  x: 0, // x = row index
+  y: 0, // y = column index
   travelLog: [],
 };
 
@@ -38,9 +38,10 @@ function turnLeft(rover) {
       break;
     default:
       console.log("You can't execute that command.");
+      return;
   }
 
-  grid[rover.x][rover.y] = rover.direction; // Update grid with new direction
+  grid[rover.x][rover.y] = rover.direction; // Update grid with Rover's new position and direction
 }
 
 function turnRight(rover) {
@@ -58,7 +59,7 @@ function turnRight(rover) {
       rover.direction = "N";
       break;
     default:
-      console.log("You can't execute that command");
+      return;
   }
 
   grid[rover.x][rover.y] = rover.direction;
@@ -66,113 +67,151 @@ function turnRight(rover) {
 
 // Define Rover's moves
 function moveForward(rover) {
-  grid[rover.x][rover.y] = " "; // Delete former position on grid
-
   switch (rover.direction) {
     case "N":
       if (rover.x === 0) {
         console.log("You can't move forward.");
-        return;
+        return false;
       }
+
       rover.x--;
-      break;
+      return true;
+
     case "E":
       if (rover.y === grid.length - 1) {
         console.log("You can't move forward.");
-        return;
+        return false;
       }
       rover.y++;
-      break;
+      return true;
+
     case "S":
       if (rover.x === grid[0].length - 1) {
         console.log("You can't move forward.");
-        return;
+        return false;
       }
       rover.x++;
-      break;
+      return true;
+
     case "W":
       if (rover.y === 0) {
         console.log("You can't move forward.");
-        return;
+        return false;
       }
       rover.y--;
-      break;
-    default:
-      console.log("You can't execute that command.");
-      return;
-  }
+      return true;
 
-  console.log("You can move forward.");
-  grid[rover.x][rover.y] = rover.direction; // Update grid with new direction
+    default:
+      return false;
+  }
 }
 
 function moveBackward(rover) {
-  grid[rover.x][rover.y] = " ";
-
   switch (rover.direction) {
     case "N":
       if (rover.x === grid[0].length - 1) {
         console.log("You can't move backward.");
-        return;
+        return false;
       }
       rover.x++;
-      break;
+      return true;
+
     case "E":
       if (rover.y === 0) {
         console.log("You can't move backward.");
-        return;
+        return false;
       }
       rover.y--;
-      break;
+      return true;
+
     case "S":
       if (rover.x === 0) {
         console.log("You can't move backward.");
-        return;
+        return false;
       }
       rover.x--;
-      break;
+      return true;
+
     case "W":
       if (rover.y === grid.length - 1) {
         console.log("You can't move backward.");
-        return;
+        return false;
       }
       rover.y++;
-      break;
-    default:
-      console.log("You can't execute that command.");
-      return;
-  }
+      return true;
 
-  console.log("You can move backward.");
-  grid[rover.x][rover.y] = rover.direction;
+    default:
+      return false;
+  }
+}
+
+function updateGridAndHistory(prevX, prevY, newX, newY, direction) {
+  // Check if move is valid
+  const isValidMove =
+    newX >= 0 && newX < grid[0].length && newY >= 0 && newY < grid.length;
+
+  if (isValidMove) {
+    // Delete former position on grid
+    grid[prevX][prevY] = " ";
+
+    // Update grid with Rover's new position and direction
+    grid[newX][newY] = direction;
+
+    // Update history if there is a move
+    if (prevX !== newX || prevY !== newY) {
+      rover.travelLog.push(`Moved from ${prevX}/${prevY} to ${newX}/${newY}.`);
+    }
+  } else {
+    console.log("Invalid move.");
+  }
 }
 
 // Pilot Rover and log its moves
 function pilotRover(str) {
+  // Save current position in order to restore it in case of invalid move
+  const prevX = rover.x;
+  const prevY = rover.y;
+
   switch (str) {
     case "l":
       turnLeft(rover);
-      rover.travelLog.push("You have turned left.");
       break;
+
     case "r":
       turnRight(rover);
       rover.travelLog.push("You have turned right.");
       break;
+
     case "f":
-      moveForward(rover);
-      rover.travelLog.push("You have moved forward.");
+      if (moveForward(rover)) {
+        rover.travelLog.push("You have moved forward.");
+      } else {
+        console.log("You can't execute that command.");
+        return;
+      }
       break;
+
     case "b":
-      moveBackward(rover);
-      rover.travelLog.push("You have moved backward.");
+      if (moveBackward(rover)) {
+        rover.travelLog.push("You have moved backward.");
+      } else {
+        console.log("You can't execute that command.");
+        return;
+      }
       break;
+
     default:
       console.log("You can't execute that command.");
       return;
   }
 
+  // Update grid and history
+  updateGridAndHistory(prevX, prevY, rover.x, rover.y, rover.direction);
+
   // Display grid after every move
   console.table(grid);
+
+  // Display Rover's information
   console.log("Rover's current position and direction:");
   console.log(`- Position: ${rover.x}/${rover.y}`);
   console.log(`- Direction: ${rover.direction}\n`);
@@ -208,8 +247,7 @@ async function getInput() {
 // Handle user's input
 function handleInput(move) {
   // Log results
-  console.log("Command-line input received:");
-  console.log("move:", move);
+  console.log("Command-line input received:", move);
 
   // Pilot Rover with user's input
   pilotRover(move);
@@ -221,6 +259,7 @@ function handleInput(move) {
 async function getUserInput() {
   try {
     const userInput = await getInput();
+
     handleInput(userInput);
   } catch (error) {
     console.error("Error getting user input:", error.message);

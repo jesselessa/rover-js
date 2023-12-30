@@ -114,6 +114,7 @@ function moveBackward(rover) {
         return false;
       }
       rover.x++;
+
       return true;
 
     case "E":
@@ -122,6 +123,7 @@ function moveBackward(rover) {
         return false;
       }
       rover.y--;
+
       return true;
 
     case "S":
@@ -164,6 +166,17 @@ function updateGridAndHistory(prevX, prevY, newX, newY, direction) {
   } else {
     console.log("Invalid move.");
   }
+}
+
+// Display initial state of grid
+function displayInitialGrid() {
+  // Update grid with initial direction
+  grid[rover.x][rover.y] = rover.direction;
+
+  console.table(grid);
+  console.log("Rover's initial position and direction:");
+  console.log(`- Position: ${rover.x}/${rover.y}`);
+  console.log(`- Direction: ${rover.direction}\n`);
 }
 
 // Pilot Rover and log its moves
@@ -268,6 +281,9 @@ async function getUserInput() {
 
 // Start prompt
 prompt.start();
+
+// Display initial state of grid
+displayInitialGrid();
 
 // Call first input
 getUserInput();

@@ -31,10 +31,10 @@ This project has been created with HTML, CSS and JavaScript.
 
 ## Features
 
-- Forward and backward movements.
 - Left and right rotations.
+- Forward and backward movements.
+- Current position and direction.
 - Resetting the grid.
-- Rover current position and direction.
 
 ## How to play
 

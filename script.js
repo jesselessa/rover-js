@@ -1,3 +1,9 @@
+// Add year to footer
+const year = document.querySelector(".year");
+const date = new Date().getFullYear();
+year.append(date);
+
+// Select game elements
 const grid = document.querySelector("#grid");
 const roverInfo = document.querySelector("#roverInfo");
 const moveInput = document.querySelector("#move");

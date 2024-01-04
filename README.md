@@ -8,7 +8,7 @@ This project is an interactive application that allows you to control a rover on
 - [Stack](#stack)
 - [Screenshot](#screenshot)
 - [Features](#features)
-- [How to play ?](#how-to-play-?)
+- [How to play ?](#how-to-play)
   - [Commands](#commands)
   - [Reset](#reset)
 - [Run the project locally](#run-the-project-locally)
@@ -53,8 +53,8 @@ This project has been created with HTML, CSS and JavaScript.
 
 ## Run the project locally
 
-1. Clone the repository : `git clone https://github.com/jesselessa/jeanne.git`
-2. Navigate to the project directory : `cd jeanne`
+1. Clone the repository : `git clone https://github.com/jesselessa/rover-js.git`
+2. Navigate to the project directory : `cd rover-js`
 3. Open the `index.html` file in your preferred browser and start playing.
 
 ## Contributing

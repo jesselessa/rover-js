@@ -4,10 +4,10 @@ const date = new Date().getFullYear();
 year.append(date);
 
 // Select game elements
+const form = document.querySelector("form");
 const grid = document.querySelector("#grid");
 const roverInfo = document.querySelector("#roverInfo");
 const moveInput = document.querySelector("#move");
-const submit = document.querySelector(".submit");
 const reset = document.querySelector(".reset");
 
 const rover = {
@@ -46,13 +46,18 @@ function updateRoverInfo() {
 }
 
 // Handle user's move submission
-function submitMove() {
+function submitMove(e) {
+  e.preventDefault();
+
   const move = moveInput.value.toLowerCase();
   pilotRover(move);
   updateGrid();
   updateRoverInfo();
+
+  // Reset input value after submission
+  moveInput.value = "";
 }
-submit.addEventListener("click", submitMove);
+form.addEventListener("submit", submitMove);
 
 // Reset
 function resetGridAndInfo() {

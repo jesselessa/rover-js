@@ -13,13 +13,17 @@
     <div id="container-grid">
       <div id="grid"></div>
 
-      <div id="input-group">
-        <label for="move">ENTER YOUR MOVE : </label>
-        <input type="text" id="move" name="move" maxlength="1" />
+      <form>
+        <div class="input-group">
+          <label for="move">ENTER YOUR MOVE : </label>
+          <input type="text" id="move" name="move" maxlength="1"/>
+        </div>
 
-        <button class="submit">Submit</button>
-        <button class="reset">Reset</button>
-      </div>
+        <div class="form-buttons">
+          <button type="submit" class="submit">Submit</button>
+          <button type="button" class="reset">Reset</button>
+        </div>
+      </form>
 
       <div id="roverInfo"></div>
     </div>

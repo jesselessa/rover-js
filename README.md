@@ -1,28 +1,43 @@
 # rover-js
 
-## 👉 See project: https://jesselessa.github.io/rover-js/
+This project is an interactive application that allows you to control a rover on a virtual grid. The goal is to provide a fun experience while practicing basic programming concepts.
 
 ## Table of Contents
 
-1. [Introduction](#1-introduction)
-2. [Features](#2-features)
-3. [Usage](#3-usage)
-   - [Commands](#commands)
-   - [Reset](#reset)
-4. [Possible Enhancements](#4-possible-enhancements)
+- [Demo](#demo)
+- [Stack](#stack)
+- [Screenshot](#screenshot)
+- [Features](#features)
+- [How to play ?](#how-to-play-?)
+  - [Commands](#commands)
+  - [Reset](#reset)
+- [Run the project locally](#run-the-project-locally)
+- [Contributing](#contributing)
+- [Possible Enhancements](#possible-enhancements)
+- [Stay Updated](#stay-updated)
+- [Contact](#contact)
 
-## 1. Introduction
+## Demo
 
-The Rover Project is an interactive application that allows you to control a robot called Rover on a virtual grid. The goal is to provide a fun experience while practicing basic programming concepts.
+You can see a live demo of the project [here](https://jesselessa.github.io/rover-js/).
 
-## 2. Features
+## Stack
+
+This project has been created with HTML, CSS and JavaScript.
+
+## Screenshot
+
+![Screenshot](./images/screenshot.png)
+
+## Features
 
 - Forward and backward movements.
 - Left and right rotations.
-- Resetting the grid and Rover information.
-- History of Rover movements.
+- Resetting the grid.
+- Rover current position and direction.
+- History of rover movements.
 
-## 3. Usage
+## How to play ?
 
 ### Commands
 
@@ -36,10 +51,33 @@ The Rover Project is an interactive application that allows you to control a rob
 
 - The **"Reset"** button resets the position and orientation of the rover, as well as the movement history.
 
-## 4. Possible Enhancements
+## Run the project locally
+
+1. Clone the repository : `git clone https://github.com/jesselessa/jeanne.git`
+2. Navigate to the project directory : `cd jeanne`
+3. Open the `index.html` file in your preferred browser and start playing.
+
+## Contributing
+
+- If you're interested in contributing, explore the project's structure in the HTML, CSS, and JavaScript files.
+- Feel free to make improvements, fix bugs, or suggest new features.
+
+## Possible Enhancements
 
 - Improved user interface with visual buttons.
 - Animations for Rover movements.
 - Enhanced error handling with interactive messages.
 - Restricting certain commands based on direction.
 - Obstacle mode with randomly placed obstacles on the grid.
+
+## Stay updated
+
+To stay updated with the latest changes, you can pull the latest changes from the repository : `git pull origin main`
+
+## Contact
+
+For inquiries, contact me via [LinkedIn](https://www.linkedin.com/in/jessica-elessa/) or [GitHub](https://github.com/jesselessa).
+
+---
+
+&copy; 2024, Jessica ELESSA - All rights reserved

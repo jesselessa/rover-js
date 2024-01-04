@@ -257,7 +257,7 @@ function displayInitialGrid(rover) {
 // Initial display
 displayInitialGrid(rover);
 
-// TODO - Comment former code and uncomment below if you want to use Rover game only with console
+// TODO - Comment former code and uncomment below if you want to play Rover game with console using Prompt library
 // // Use "prompt" library
 // const prompt = require("prompt");
 

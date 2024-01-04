@@ -37,7 +37,7 @@ This project has been created with HTML, CSS and JavaScript.
 - Rover current position and direction.
 - History of rover movements.
 
-## How to play ?
+## How to play
 
 ### Commands
 

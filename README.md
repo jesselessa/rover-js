@@ -8,7 +8,7 @@ This project is an interactive application that allows you to control a rover on
 - [Stack](#stack)
 - [Screenshot](#screenshot)
 - [Features](#features)
-- [How to play ?](#how-to-play)
+- [How to play](#how-to-play)
   - [Commands](#commands)
   - [Reset](#reset)
 - [Run the project locally](#run-the-project-locally)

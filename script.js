@@ -39,9 +39,9 @@ function updateGrid() {
 // Update Rover's information
 function updateRoverInfo() {
   roverInfo.innerHTML = `
-        <p>Current position and direction of rover&nbsp;:</p>
-        <p>- Position : ${rover.x}/${rover.y}</p>
-        <p>- Direction : ${rover.direction}</p>        
+        <p>CURRENT POSITION AND DIRECTION&nbsp;:</p>
+        <p>- <span>Position :</span> ${rover.x}/${rover.y}</p>
+        <p>- <span>Direction :</span> ${rover.direction}</p>        
       `;
 }
 

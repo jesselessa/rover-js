@@ -35,7 +35,6 @@ This project has been created with HTML, CSS and JavaScript.
 - Left and right rotations.
 - Resetting the grid.
 - Rover current position and direction.
-- History of rover movements.
 
 ## How to play
 

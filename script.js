@@ -34,10 +34,10 @@ function updateGrid() {
 // Update Rover's information
 function updateRoverInfo() {
   roverInfo.innerHTML = `
-        <p>Rover's current position and direction&nbsp;:</p>
+        <p>Rover current position and direction&nbsp;:</p>
         <p>- Position : ${rover.x}/${rover.y}</p>
         <p>- Direction : ${rover.direction}</p>
-        <p class="history">Your Rover's history :</p>
+        <p class="history">History of rover movements&nbsp;:</p>
         <p>${rover.travelLog.join("<br>")}</p>
       `;
 }

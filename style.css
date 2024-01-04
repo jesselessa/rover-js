@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "Orbitron regular";
+  src: url("./fonts/Orbitron/static/Orbitron-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Orbitron bold";
+  src: url("./fonts/Orbitron/static/Orbitron-Bold.ttf");
+}
+
 *,
 ::before,
 ::after {
@@ -7,13 +17,17 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  font-family: "Orbitron regular", Arial, sans-serif;
   text-align: center;
+  color: white;
+  background: url("./images/rover-bg.jpg") no-repeat center/cover;
   padding: 10px;
 }
 
 h1 {
   min-height: 8vh;
+  font-family: "Orbitron bold";
   margin-bottom: 20px;
 }
 
@@ -28,16 +42,16 @@ h1 {
 #grid {
   display: grid;
   grid-template-columns: repeat(10, 40px);
-  gap: 1px;
+  gap: 5px;
 }
 
 .cell {
   width: 40px;
   height: 40px;
-  border: 1px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.7);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 #input-group {

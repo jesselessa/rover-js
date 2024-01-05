@@ -40,15 +40,12 @@ This project has been created with HTML, CSS and JavaScript.
 
 ### Commands
 
-- Use the directional letters on your keyboard to move Rover :
-  - **"f"**: Move forward in the current direction.
-  - **"b"**: Move backward in the opposite direction.
-  - **"l"**: Turn the robot to the left.
-  - **"r"**: Turn the robot to the right.
-
-### Reset
-
-- The **"Reset"** button resets the position and orientation of the rover, as well as the movement history.
+- Use the visual buttons to move the rover :
+  - ![forward]("./images/forward.png) : Move forward in the current direction.
+  - ![backward]("./images/backward.png) : Move backward in the opposite direction.
+  - ![left]("./images/left.png) : Turn to the left.
+  - ![right]("./images/right.png) : Turn to the right.
+  - ![reset]("./images/reset.png) : Reset the position and orientation of the rover.
 
 ## Run the project locally
 
@@ -63,11 +60,11 @@ This project has been created with HTML, CSS and JavaScript.
 
 ## Possible Enhancements
 
-- Improved user interface with visual buttons.
 - Animations for Rover movements.
 - Enhanced error handling with interactive messages.
 - Restricting certain commands based on direction.
 - Obstacle mode with randomly placed obstacles on the grid.
+- Etc.
 
 ## Stay updated
 
@@ -75,7 +72,7 @@ To stay updated with the latest changes, you can pull the latest changes from th
 
 ## Contact
 
-For inquiries, contact me via [LinkedIn](https://www.linkedin.com/in/jessica-elessa/) or [GitHub](https://github.com/jesselessa).
+For inquiries, contact me via [LinkedIn](https://www.linkedin.com/in/jessica-elessa/).
 
 ---
 

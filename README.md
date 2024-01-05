@@ -1,6 +1,6 @@
 # rover-js
 
-This project is an interactive application that allows you to control a rover on a virtual grid. The goal is to provide a fun experience while practicing basic programming concepts.
+This project is an interactive application that allows a user to control a rover on a virtual grid using directional buttons. The goal is to provide a fun experience while practicing basic programming concepts.
 
 ## Table of Contents
 
@@ -10,11 +10,6 @@ This project is an interactive application that allows you to control a rover on
 - [Features](#features)
 - [How to play](#how-to-play)
   - [Commands](#commands)
-    <!-- - [forward](#forward)
-    - [backward](#backward)
-    - [left](#left)
-    - [right](#right)
-    - [reset](#reset) -->
 - [Run the project locally](#run-the-project-locally)
 - [Contributing](#contributing)
 - [Possible Enhancements](#possible-enhancements)
@@ -45,11 +40,12 @@ This project has been created with HTML, CSS and JavaScript.
 ### Commands
 
 Use the visual buttons to move the rover :
-  - ![forward](./images/forward.png) : Move forward in the current direction.
-  - ![backward](./images/backward.png) : Move backward in the opposite direction.
-  - ![left](./images/left.png) : Turn to the left.
-  - ![right](./images/right.png) : Turn to the right.
-  - ![reset](./images/reset.png) : Reset the position and orientation.
+
+- ![forward](./images/forward-24.png) : Move forward in the current direction.
+- ![backward](./images/backward-24.png) : Move backward in the opposite direction.
+- ![left](./images/left-24.png) : Turn to the left.
+- ![right](./images/right-24.png) : Turn to the right.
+- ![reset](./images/reset-24.png) : Reset the position and orientation.
 
 ## Run the project locally
 
@@ -72,7 +68,7 @@ Use the visual buttons to move the rover :
 
 ## Stay updated
 
-To stay updated with the latest changes, you can pull the latest changes from the repository : `git pull origin main`
+To stay updated with the latest changes, you can pull them from the repository : `git pull origin main`
 
 ## Contact
 

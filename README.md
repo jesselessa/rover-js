@@ -10,7 +10,11 @@ This project is an interactive application that allows you to control a rover on
 - [Features](#features)
 - [How to play](#how-to-play)
   - [Commands](#commands)
-  - [Reset](#reset)
+    - [forward](#forward)
+    - [backward](#backward)
+    - [left](#left)
+    - [right](#right)
+    - [reset](#reset)
 - [Run the project locally](#run-the-project-locally)
 - [Contributing](#contributing)
 - [Possible Enhancements](#possible-enhancements)
@@ -45,7 +49,7 @@ This project has been created with HTML, CSS and JavaScript.
   - ![backward]("./images/backward.png) : Move backward in the opposite direction.
   - ![left]("./images/left.png) : Turn to the left.
   - ![right]("./images/right.png) : Turn to the right.
-  - ![reset]("./images/reset.png) : Reset the position and orientation of the rover.
+  - ![reset]("./images/reset.png) : Reset the position and orientation.
 
 ## Run the project locally
 

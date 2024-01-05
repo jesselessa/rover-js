@@ -8,31 +8,30 @@
     <link rel="icon" href="./images/rover-favicon.png" type="image/png" />
   </head>
   <body>
-    <h1>ROVER GAME</h1>
+    <div id="app">
+      <h1>ROVER GAME</h1>
 
-    <div id="container-grid">
       <div id="grid"></div>
 
-      <form>
-        <div class="input-group">
-          <label for="move">ENTER YOUR MOVE : </label>
-          <input type="text" id="move" name="move" maxlength="1"/>
-        </div>
-
-        <div class="form-buttons">
-          <button type="submit" class="submit">Submit</button>
-          <button type="button" class="reset">Reset</button>
-        </div>
-      </form>
+      <div id="arrowGrid">
+        <img src="./images/forward.png" class="arrow forward" alt="forward" />
+        <img
+          src="./images/backward.png"
+          class="arrow backward"
+          alt="backward"
+        />
+        <img src="./images/left.png" class="arrow left" alt="left" />
+        <img src="./images/right.png" class="arrow right" alt="right" />
+      </div>
 
       <div id="roverInfo"></div>
-    </div>
 
-    <footer>
-      <p>
-        &copy; <span class="year"></span> Jessica Elessa - All rights reserved
-      </p>
-    </footer>
+      <footer>
+        <p>
+          &copy; <span class="year"></span> Jessica Elessa - All rights reserved
+        </p>
+      </footer>
+    </div>
 
     <script src="./script.js"></script>
   </body>

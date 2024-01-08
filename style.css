@@ -33,7 +33,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  gap: 35px;
+  gap: 30px;
   padding: 20px 10px;
 }
 
@@ -51,34 +51,35 @@ h1 {
   gap: 100px;
 }
 
-.arrows-roverInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-}
-
-#boardGrid {
+#board-grid {
   display: grid;
-  grid-template-columns: repeat(10, 40px);
+  grid-template-columns: repeat(10, 50px);
   gap: 5px;
-  color: #8b0000;
   font-family: "Orbitron bold";
 }
 
 .cell {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  color: darkred;
   background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#arrowGrid {
+.arrows-rover-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+#arrow-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
+  gap: 10px;
   font-family: "Orbitron bold";
 }
 
@@ -117,14 +118,14 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 28px;
+  font-size: 40px;
   background-color: orangered;
   border-radius: 50%;
   cursor: pointer;
   z-index: 10;
 }
 
-#roverInfo {
+#rover-info {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -132,12 +133,12 @@ h1 {
   gap: 5px;
 }
 
-#roverInfo p:nth-child(1),
-#roverInfo span {
+#rover-info p:nth-child(1),
+#rover-info span {
   font-family: "Orbitron bold";
 }
 
-.pokemonInfo {
+.pokemon-info {
   padding: 10px;
 }
 
@@ -146,16 +147,79 @@ footer {
   padding: 10px;
 }
 
+/* Modal */
+#modal-container {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.modal {
+  width: 80%;
+  color: black;
+  background-color: #fefefe;
+  padding: 20px;
+  margin: 15% auto;
+  opacity: 0.9;
+}
+
+.alert-message {
+  margin-bottom: 20px;
+}
+
+.close-button {
+  font-family: "Orbitron bold";
+}
+
+.close-button:hover {
+  cursor: pointer;
+}
+
+.ok {
+  font-size: 18px;
+  background-color: darkred;
+  color: white;
+  border: none;
+  padding: 7px;
+}
+
+.sign {
+  float: right;
+  font-size: 30px;
+  color: #aaa;
+}
+
+.sign:hover,
+.sign:focus {
+  color: darkred;
+}
+
 @media screen and (max-width: 1000px) {
   .grid-arrows-container {
     flex-direction: column;
     padding: 0 10px;
-    gap: 35px;
+    gap: 50px;
   }
-  .arrows-roverInfo {
-    gap: 35px;
+  .arrow,
+  .reset {
+    width: 100px;
+    height: 100px;
+  }
+  .reset {
+    font-size: 50px;
   }
 }
 
 @media screen and (max-width: 475px) {
+  .grid-arrows-container {
+    gap: 30px;
+  }
+  .arrows-rover-info {
+    gap: 30px;
+  }
 }

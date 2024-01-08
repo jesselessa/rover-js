@@ -3,11 +3,29 @@ const year = document.querySelector(".year");
 const date = new Date().getFullYear();
 year.append(date);
 
+// Handle alert message
+const modalContainer = document.querySelector("#modal-container");
+const alertMessage = document.querySelector(".alert-message");
+const closeButtons = document.querySelectorAll(".close-button");
+
+function openAlertModal(message) {
+  modalContainer.style.display = "block";
+  alertMessage.innerHTML = message;
+
+  closeButtons.forEach((button) =>
+    button.addEventListener("click", closeAlertModal)
+  );
+}
+
+function closeAlertModal() {
+  modalContainer.style.display = "none";
+}
+
 // Select game elements
-const grid = document.querySelector("#boardGrid");
-const roverInfo = document.querySelector("#roverInfo");
-const arrowGrid = document.querySelector("#arrowGrid");
+const grid = document.querySelector("#board-grid");
+const arrowGrid = document.querySelector("#arrow-grid");
 const arrowButtons = document.querySelectorAll(".arrow");
+const roverInfo = document.querySelector("#rover-info");
 
 // Set rover object
 const rover = {
@@ -79,13 +97,13 @@ resetButton.classList.add("reset");
 resetButton.textContent = "R";
 arrowGrid.append(resetButton);
 
-function resetGridAndInfo() {
+const resetGridAndInfo = () => {
   rover.direction = "N";
   rover.x = 0;
   rover.y = 0;
 
   updateGridAndInfo(rover.x, rover.y);
-}
+};
 resetButton.addEventListener("click", resetGridAndInfo);
 
 // Rover directions
@@ -104,7 +122,6 @@ function turnLeft() {
       rover.direction = "N";
       break;
     default:
-      console.log("You can't execute that command.");
       return;
   }
 }
@@ -133,7 +150,7 @@ function moveForward(rover) {
   switch (rover.direction) {
     case "N":
       if (rover.x === 0) {
-        alert("You can't move forward.");
+        openAlertModal("You can't move forward&nbsp;!");
         return;
       }
       rover.x--;
@@ -141,7 +158,7 @@ function moveForward(rover) {
 
     case "E":
       if (rover.y === GRID_SIZE - 1) {
-        alert("You can't move forward.");
+        openAlertModal("You can't move forward&nbsp;!");
         return;
       }
       rover.y++;
@@ -149,7 +166,7 @@ function moveForward(rover) {
 
     case "S":
       if (rover.x === GRID_SIZE - 1) {
-        alert("You can't move forward.");
+        openAlertModal("You can't move forward&nbsp;!");
         return;
       }
       rover.x++;
@@ -157,7 +174,7 @@ function moveForward(rover) {
 
     case "W":
       if (rover.y === 0) {
-        alert("You can't move forward.");
+        openAlertModal("You can't move forward&nbsp;!");
         return;
       }
       rover.y--;
@@ -172,7 +189,7 @@ function moveBackward(rover) {
   switch (rover.direction) {
     case "N":
       if (rover.x === GRID_SIZE - 1) {
-        alert("You can't move backward.");
+        openAlertModal("You can't move backward&nbsp;!");
         return;
       }
       rover.x++;
@@ -180,7 +197,7 @@ function moveBackward(rover) {
 
     case "E":
       if (rover.y === 0) {
-        alert("You can't move backward.");
+        openAlertModal("You can't move backward&nbsp;!");
         return;
       }
       rover.y--;
@@ -188,7 +205,7 @@ function moveBackward(rover) {
 
     case "S":
       if (rover.x === 0) {
-        alert("You can't move backward.");
+        openAlertModal("You can't move backward&nbsp;!");
         return;
       }
       rover.x--;
@@ -196,7 +213,7 @@ function moveBackward(rover) {
 
     case "W":
       if (rover.y === GRID_SIZE - 1) {
-        alert("You can't move backward.");
+        openAlertModal("You can't move backward&nbsp;!");
         return;
       }
       rover.y++;
@@ -226,9 +243,6 @@ function pilotRover(move) {
       break;
 
     default:
-      alert(
-        "Invalid move. Use 'l' for left, 'r' for right, 'f' for forward and 'b' for backward."
-      );
       return;
   }
 

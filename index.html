@@ -9,13 +9,22 @@
   </head>
   <body>
     <div id="app">
+      <!-- Modal alert message -->
+      <div id="modal-container">
+        <div class="modal">
+          <span class="close-button sign">&times;</span>
+          <p class="alert-message"></p>
+          <button class="close-button ok">OK</button>
+        </div>
+      </div>
+
       <h1>ROVER GAME</h1>
 
       <div class="grid-arrows-container">
-        <div id="boardGrid"></div>
+        <div id="board-grid"></div>
 
-        <div class="arrows-roverInfo">
-          <div id="arrowGrid">
+        <div class="arrows-rover-info">
+          <div id="arrow-grid">
             <img
               src="./images/forward.png"
               class="arrow forward"
@@ -30,11 +39,11 @@
             <img src="./images/right.png" class="arrow right" alt="right" />
           </div>
 
-          <div id="roverInfo"></div>
+          <div id="rover-info"></div>
         </div>
       </div>
 
-      <div class="pokemonInfo">Pokemon Info</div>
+      <div class="pokemon-info">Pokemon Info</div>
 
       <footer>
         <p>

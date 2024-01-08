@@ -67,8 +67,8 @@ function updateGridAndInfo(indexRow, indexColumn) {
 // Handle rover moves with arrow buttons
 arrowButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const direction = button.classList[1]; // Extracts direction from class
-    pilotRover(direction.charAt(0));
+    const direction = button.classList[1]; // Extracts direction from class (2 classes on button :'arrow' & '[direction_name]')
+    pilotRover(direction.charAt(0)); // First letter of direction
   });
 });
 
@@ -76,8 +76,8 @@ arrowButtons.forEach((button) => {
 const resetButton = document.createElement("div");
 
 resetButton.classList.add("reset");
-resetButton.innerHTML = "R";
-arrowGrid.appendChild(resetButton);
+resetButton.textContent = "R";
+arrowGrid.append(resetButton);
 
 function resetGridAndInfo() {
   rover.direction = "N";
@@ -235,9 +235,9 @@ function pilotRover(move) {
   updateGridAndInfo(rover.x, rover.y);
 }
 
-function displayInitialGrid(rover) {
+function displayInitialGrid() {
   updateGridAndInfo(rover.x, rover.y);
 }
 
 // Grid initial display
-displayInitialGrid(rover);
+displayInitialGrid();

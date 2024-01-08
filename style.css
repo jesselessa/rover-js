@@ -1,11 +1,11 @@
 @font-face {
   font-family: "Orbitron regular";
-  src: url("./fonts/Orbitron/static/Orbitron-Regular.ttf");
+  src: url(./fonts/Orbitron/static/Orbitron-Regular.ttf);
 }
 
 @font-face {
   font-family: "Orbitron bold";
-  src: url("./fonts/Orbitron/static/Orbitron-Bold.ttf");
+  src: url(./fonts/Orbitron/static/Orbitron-Bold.ttf);
 }
 
 *,
@@ -14,6 +14,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  /* box-shadow: 0 0 0 4px red inset; */
 }
 
 body {
@@ -21,7 +22,7 @@ body {
   font-size: 20px;
   text-align: center;
   color: white;
-  background: url("./images/rover-bg.jpg") no-repeat center/cover;
+  background: url(./images/rover-bg.jpg) no-repeat center/cover;
 }
 
 #app {
@@ -32,11 +33,29 @@ body {
   justify-content: space-around;
   align-items: center;
   gap: 30px;
-  padding: 10px;
+  padding: 20px 10px;
 }
 
 h1 {
+  width: 100%;
   font-family: "Orbitron bold";
+}
+
+.grid-arrows-container {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10px;
+  gap: 100px;
+}
+
+.arrows-roverInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
 }
 
 #grid {
@@ -64,8 +83,8 @@ h1 {
 }
 
 .arrow {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 
@@ -92,6 +111,8 @@ h1 {
 .reset {
   grid-column: 2;
   grid-row: 2;
+  width: 80px;
+  height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -116,6 +137,11 @@ h1 {
   font-family: "Orbitron bold";
 }
 
+.pokemonInfo {
+  padding: 10px;
+}
+
 footer {
-  padding-top: 10px 10px 0 10px;
+  width: 100%;
+  padding: 10px;
 }

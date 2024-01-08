@@ -4,7 +4,7 @@ const date = new Date().getFullYear();
 year.append(date);
 
 // Select game elements
-const grid = document.querySelector("#grid");
+const grid = document.querySelector("#boardGrid");
 const roverInfo = document.querySelector("#roverInfo");
 const arrowGrid = document.querySelector("#arrowGrid");
 const arrowButtons = document.querySelectorAll(".arrow");

@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Orbitron regular";
   src: url(./fonts/Orbitron/static/Orbitron-Regular.ttf);
+  font-display: swap;
 }
 
 @font-face {
@@ -18,7 +19,7 @@
 }
 
 body {
-  font-family: "Orbitron regular", Arial, sans-serif;
+  font-family: "Orbitron regular", sans-serif;
   font-size: 20px;
   text-align: center;
   color: white;
@@ -38,7 +39,6 @@ body {
 
 h1 {
   width: 100%;
-  font-family: "Orbitron bold";
 }
 
 .grid-arrows-container {
@@ -58,7 +58,7 @@ h1 {
   gap: 50px;
 }
 
-#grid {
+#boardGrid {
   display: grid;
   grid-template-columns: repeat(10, 40px);
   gap: 5px;

@@ -32,7 +32,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  gap: 30px;
+  gap: 35px;
   padding: 20px 10px;
 }
 
@@ -144,4 +144,18 @@ h1 {
 footer {
   width: 100%;
   padding: 10px;
+}
+
+@media screen and (max-width: 1000px) {
+  .grid-arrows-container {
+    flex-direction: column;
+    padding: 0 10px;
+    gap: 35px;
+  }
+  .arrows-roverInfo {
+    gap: 35px;
+  }
+}
+
+@media screen and (max-width: 475px) {
 }

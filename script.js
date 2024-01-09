@@ -295,4 +295,35 @@ function handleOrientationChange() {
 }
 
 window.addEventListener("orientationchange", handleOrientationChange);
+// Force message to appear as soon as screen width changes
 window.addEventListener("resize", handleOrientationChange);
+
+// Handle background music
+const backgroundMusic = document.querySelector("#background-music");
+const toggleDiv = document.querySelector("#toggle");
+const toggleMusicBtn = document.querySelector("#toggle-music");
+const caption = document.querySelector("figcaption");
+
+function handleMusicBg() {
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+    toggleMusicBtn.src = "./images/sound-off.png";
+    updateCaption();
+  } else {
+    backgroundMusic.pause();
+    toggleMusicBtn.src = "./images/sound-on.png";
+    updateCaption();
+  }
+}
+
+function updateCaption() {
+  if (window.innerWidth <= 700) {
+    caption.textContent = "";
+  } else {
+    caption.textContent = backgroundMusic.paused ? "Sound on" : "Sound off";
+  }
+}
+updateCaption(); // Actualize caption on loading page
+
+toggleDiv.addEventListener("click", handleMusicBg);
+window.addEventListener("resize", updateCaption);

@@ -1,25 +1,6 @@
-// Add year to footer
-const year = document.querySelector(".year");
-const date = new Date().getFullYear();
-year.append(date);
-
-// Handle alert message
-const modalContainer = document.querySelector("#modal-container");
-const alertMessage = document.querySelector(".alert-message");
-const closeButtons = document.querySelectorAll(".close-button");
-
-function openAlertModal(message) {
-  modalContainer.style.display = "block";
-  alertMessage.innerHTML = message;
-
-  closeButtons.forEach((button) =>
-    button.addEventListener("click", closeAlertModal)
-  );
-}
-
-function closeAlertModal() {
-  modalContainer.style.display = "none";
-}
+// Constants
+const MIN_GRID_SIZE = 8;
+const MAX_GRID_SIZE = 10;
 
 // Select game elements
 const grid = document.querySelector("#board-grid");
@@ -27,27 +8,38 @@ const arrowGrid = document.querySelector("#arrow-grid");
 const arrowButtons = document.querySelectorAll(".arrow");
 const roverInfo = document.querySelector("#rover-info");
 
-// Set rover object
+// Rover object
 const rover = {
   direction: "N",
   x: 0, // x = row index
   y: 0, // y = column index
 };
 
-// Set size of grid
-const GRID_SIZE = 10;
+// Display initial grid
+displayInitialGrid();
+
+function displayInitialGrid() {
+  initGrid();
+  updateGridAndInfo(rover.x, rover.y);
+}
+
+// Get grid size depending on screen width
+function getGridSize() {
+  return window.innerWidth <= 475 ? MIN_GRID_SIZE : MAX_GRID_SIZE;
+}
 
 // Generate grid
 function initGrid() {
-  for (let r = 0; r < GRID_SIZE; r++) {
-    for (let c = 0; c < GRID_SIZE; c++) {
+  const gridSize = getGridSize();
+
+  for (let r = 0; r < gridSize; r++) {
+    for (let c = 0; c < gridSize; c++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
       grid.appendChild(cell);
     }
   }
 }
-initGrid();
 
 // Update grid with rover position
 function updateGrid() {
@@ -55,7 +47,8 @@ function updateGrid() {
   cells.forEach((cell) => (cell.textContent = ""));
 
   // Calculate index of cell corresponding to current position of rover
-  const roverCellIndex = rover.x * GRID_SIZE + rover.y;
+  const gridSize = getGridSize();
+  const roverCellIndex = rover.x * gridSize + rover.y;
   cells[roverCellIndex].textContent = rover.direction;
 }
 
@@ -70,11 +63,13 @@ function updateRoverInfo() {
 
 // Update grid and info
 function updateGridAndInfo(indexRow, indexColumn) {
+  const gridSize = getGridSize();
+
   const isValidMove =
     indexRow >= 0 &&
-    indexRow < GRID_SIZE &&
+    indexRow < gridSize &&
     indexColumn >= 0 &&
-    indexColumn < GRID_SIZE;
+    indexColumn < gridSize;
 
   if (isValidMove) {
     updateGrid();
@@ -90,9 +85,8 @@ arrowButtons.forEach((button) => {
   });
 });
 
-// Reset button
+// Reset grid and info
 const resetButton = document.createElement("div");
-
 resetButton.classList.add("reset");
 resetButton.textContent = "R";
 arrowGrid.append(resetButton);
@@ -104,9 +98,10 @@ const resetGridAndInfo = () => {
 
   updateGridAndInfo(rover.x, rover.y);
 };
+
 resetButton.addEventListener("click", resetGridAndInfo);
 
-// Rover directions
+// Rover directions and moves
 function turnLeft() {
   switch (rover.direction) {
     case "N":
@@ -145,8 +140,9 @@ function turnRight() {
   }
 }
 
-// Rover moves
 function moveForward(rover) {
+  const gridSize = getGridSize();
+
   switch (rover.direction) {
     case "N":
       if (rover.x === 0) {
@@ -157,7 +153,7 @@ function moveForward(rover) {
       break;
 
     case "E":
-      if (rover.y === GRID_SIZE - 1) {
+      if (rover.y === gridSize - 1) {
         openAlertModal("You can't move forward&nbsp;!");
         return;
       }
@@ -165,7 +161,7 @@ function moveForward(rover) {
       break;
 
     case "S":
-      if (rover.x === GRID_SIZE - 1) {
+      if (rover.x === gridSize - 1) {
         openAlertModal("You can't move forward&nbsp;!");
         return;
       }
@@ -186,9 +182,11 @@ function moveForward(rover) {
 }
 
 function moveBackward(rover) {
+  const gridSize = getGridSize();
+
   switch (rover.direction) {
     case "N":
-      if (rover.x === GRID_SIZE - 1) {
+      if (rover.x === gridSize - 1) {
         openAlertModal("You can't move backward&nbsp;!");
         return;
       }
@@ -212,7 +210,7 @@ function moveBackward(rover) {
       break;
 
     case "W":
-      if (rover.y === GRID_SIZE - 1) {
+      if (rover.y === gridSize - 1) {
         openAlertModal("You can't move backward&nbsp;!");
         return;
       }
@@ -224,6 +222,7 @@ function moveBackward(rover) {
   }
 }
 
+// Rover driving
 function pilotRover(move) {
   switch (move) {
     case "l":
@@ -249,9 +248,51 @@ function pilotRover(move) {
   updateGridAndInfo(rover.x, rover.y);
 }
 
-function displayInitialGrid() {
-  updateGridAndInfo(rover.x, rover.y);
+// Add year to footer
+const year = document.querySelector(".year");
+const date = new Date().getFullYear();
+year.append(date);
+
+// Handle alert message
+const modalContainer = document.querySelector("#modal-container");
+const alertMessage = document.querySelector(".alert-message");
+const closeButtons = document.querySelectorAll(".close-button");
+
+function openAlertModal(message) {
+  modalContainer.style.display = "block";
+  alertMessage.innerHTML = message;
+
+  closeButtons.forEach((button) =>
+    button.addEventListener("click", closeAlertModal)
+  );
 }
 
-// Grid initial display
-displayInitialGrid();
+function closeAlertModal() {
+  modalContainer.style.display = "none";
+}
+
+// Handle orientation change depending on screen width
+function handleOrientationChange() {
+  const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+  const isSmallScreen = window.innerWidth <= 1000;
+
+  if (isLandscape && isSmallScreen) {
+    // Custom modal
+    closeButtons.forEach((button) => (button.style.display = "none"));
+    alertMessage.style.marginBottom = "0";
+
+    openAlertModal("Landscape mode is not allowed.");
+    // Force portrait mode
+    screen.orientation.lock("portrait");
+  } else {
+    // Custom modal
+    closeButtons.forEach((button) => (button.style.display = "block"));
+    alertMessage.style.marginBottom = "20px";
+
+    // In portrait mode, close modal
+    closeAlertModal();
+  }
+}
+
+window.addEventListener("orientationchange", handleOrientationChange);
+window.addEventListener("resize", handleOrientationChange);

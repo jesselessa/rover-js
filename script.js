@@ -8,6 +8,8 @@ const arrowGrid = document.querySelector("#arrow-grid");
 const arrowButtons = document.querySelectorAll(".arrow");
 const roverInfo = document.querySelector("#rover-info");
 
+// const pokemonInfo = document.querySelector(".pokemon-info");
+
 // Rover object
 const rover = {
   direction: "N",
@@ -57,7 +59,7 @@ function updateRoverInfo() {
   roverInfo.innerHTML = `
         <p>CURRENT POSITION AND DIRECTION&nbsp;:</p>
         <p>- <span>Position :</span> ${rover.x}/${rover.y}</p>
-        <p>- <span>Direction :</span> ${rover.direction}</p>        
+        <p>- <span>Direction :</span> ${rover.direction}</p>
       `;
 }
 
@@ -327,70 +329,3 @@ updateCaption(); // Actualize caption on loading page
 
 toggleDiv.addEventListener("click", handleMusicBg);
 window.addEventListener("resize", updateCaption);
-
-// Fetch data from Pokemon API
-const loadingMsg = document.querySelector(".loading");
-const pokeList = document.querySelector(".pokemon-list");
-const pokeInfo = document.querySelector(".pokemon-info");
-
-async function fetchAndRenderPokemonList() {
-  let isLoading;
-
-  try {
-    isLoading = true;
-    loadingMsg.innerHTML = "Loading...";
-
-    // Fetch original first 100 Pokemon list
-    const url = "https://pokeapi.co/api/v2/pokemon?limit=100";
-    const res = await fetch(url);
-
-    if (!res.ok) {
-      const errorMsg = await res.text();
-      throw new Error(errorMsg);
-    }
-
-    const data = await res.json();
-    const pokemons = data.results;
-
-    isLoading = false;
-    loadingMsg.innerHTML = "";
-
-    // Fetch details for each Pokemon using Promise.all
-    const pokemonPromises = pokemons.map(async (pokemon) => {
-      // isLoading = true;
-      // loadingMsg.innerHTML = "Loading...";
-
-      const pokemonRes = await fetch(pokemon.url);
-
-      if (!pokemonRes.ok) {
-        throw new Error(`Error fetching data for ${pokemon.name}`);
-      }
-
-      const pokemonDetails = await pokemonRes.json();
-      
-      // isLoading = true;
-      // loadingMsg.innerHTML = "Loading...";
-
-      return pokemonDetails;
-    });
-
-    // Wait for all promises to resolve : pokemonDetailsArray contains details for all Pokemons
-    const pokemonDetailsArray = await Promise.all(pokemonPromises);
-    const renderedHTML = pokemonDetailsArray
-      .map(
-        (pokemonDetails) => `<li>
-          <div>
-            <p>${pokemonDetails.name}</p>
-            <img src="${pokemonDetails.sprites.other["official-artwork"].front_default}" class="pokemon" alt="${pokemonDetails.name}"/>
-          </div>
-        </li>`
-      )
-      .join("");
-
-    // Update the HTML content of pokeList
-    pokeList.innerHTML = renderedHTML;
-  } catch (error) {
-    console.error(error);
-  }
-}
-fetchAndRenderPokemonList();

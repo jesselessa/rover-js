@@ -60,14 +60,14 @@ h1 {
 
 #board-grid {
   display: grid;
-  grid-template-columns: repeat(10, 40px);
+  grid-template-columns: repeat(10, 50px);
   font-family: "Orbitron bold";
   gap: 5px;
 }
 
 .cell {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   font-size: 30px;
   color: darkred;
   background-color: rgba(255, 255, 255, 0.8);
@@ -201,7 +201,7 @@ footer {
   color: darkred;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1153px) {
   .grid-arrows-container {
     width: 100%;
     flex-direction: column;
@@ -211,6 +211,13 @@ footer {
   .board-grid-container,
   .arrows-rover-info {
     width: 100%;
+  }
+  #board-grid {
+    grid-template-columns: repeat(10, 40px);
+  }
+  .cell {
+    width: 40px;
+    height: 40px;
   }
   .arrows-rover-info {
     gap: 20px;
@@ -242,7 +249,7 @@ figcaption {
   font-size: 16px;
 }
 
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 485px) {
   #board-grid {
     grid-template-columns: repeat(8, 40px);
   }
@@ -252,10 +259,11 @@ figcaption {
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 400px) {
   #board-grid {
     grid-template-columns: repeat(8, 33px);
   }
+
   .cell {
     width: 33px;
     height: 33px;

@@ -27,7 +27,7 @@ function displayInitialGrid() {
 
 // Get grid size depending on screen width
 function getGridSize() {
-  return window.innerWidth <= 475 ? MIN_GRID_SIZE : MAX_GRID_SIZE;
+  return window.innerWidth <= 485 ? MIN_GRID_SIZE : MAX_GRID_SIZE;
 }
 
 // Generate grid

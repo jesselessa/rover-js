@@ -33,7 +33,7 @@ body {
   justify-content: space-around;
   align-items: center;
   gap: 20px;
-  padding: 30px 10px;
+  padding: 25px 10px;
 }
 
 h1 {
@@ -201,6 +201,11 @@ footer {
   color: darkred;
 }
 
+/* Alien */
+.alien {
+  z-index: 10;
+}
+
 @media screen and (max-width: 1153px) {
   .grid-arrows-container {
     width: 100%;
@@ -215,7 +220,8 @@ footer {
   #board-grid {
     grid-template-columns: repeat(10, 40px);
   }
-  .cell {
+  .cell,
+  .alien {
     width: 40px;
     height: 40px;
   }
@@ -253,6 +259,9 @@ figcaption {
   #board-grid {
     grid-template-columns: repeat(8, 40px);
   }
+  .alert-message {
+    font-size: 16px;
+  }
   #toggle-music {
     width: 40px;
     height: 40px;
@@ -263,10 +272,12 @@ figcaption {
   #board-grid {
     grid-template-columns: repeat(8, 33px);
   }
-
-  .cell {
+  .cell,
+  .alien {
     width: 33px;
     height: 33px;
+  }
+  .cell {
     font-size: 25px;
   }
 }

@@ -7,22 +7,51 @@ const grid = document.querySelector("#board-grid");
 const arrowGrid = document.querySelector("#arrow-grid");
 const arrowButtons = document.querySelectorAll(".arrow");
 const roverInfo = document.querySelector("#rover-info");
+const alienImg = document.querySelector(".alien");
 
-// const pokemonInfo = document.querySelector(".pokemon-info");
-
-// Rover object
+// Other global variables
 const rover = {
   direction: "N",
   x: 0, // x = row index
   y: 0, // y = column index
 };
 
-// Display initial grid
+let gameOver = false;
+let alienFound = false;
+let timerId;
+
+// Display initial grid and start a 30-second timer
 displayInitialGrid();
 
 function displayInitialGrid() {
   initGrid();
   updateGridAndInfo(rover.x, rover.y);
+  randomlyHideAlien(); // Hide alien on initial grid setup
+  startTimer(); // Start the timer after hiding the alien
+}
+
+function startTimer() {
+  timerId = setTimeout(() => {
+    if (!alienFound) {
+      gameOver = true;
+
+      openModalAlert(
+        "GAME OVER</br>You didn't find the alien within the deadline&nbsp;!"
+      );
+    }
+  }, 30000);
+}
+
+// Randomly hide alien image under a grid cell
+function randomlyHideAlien() {
+  const cells = document.querySelectorAll(".cell");
+  const randomIndex = Math.floor(Math.random() * cells.length);
+
+  cells.forEach((cell, index) => {
+    if (index === randomIndex) {
+      cell.classList.add("has-alien");
+    }
+  });
 }
 
 // Get grid size depending on screen width
@@ -51,7 +80,22 @@ function updateGrid() {
   // Calculate index of cell corresponding to current position of rover
   const gridSize = getGridSize();
   const roverCellIndex = rover.x * gridSize + rover.y;
-  cells[roverCellIndex].textContent = rover.direction;
+  const roverCell = cells[roverCellIndex];
+  roverCell.textContent = rover.direction;
+
+  // Check if rover is on a cell with alien
+  if (roverCell.classList.contains("has-alien")) {
+    gameOver = false;
+    alienFound = true;
+
+    roverCell.innerHTML =
+      '<img src="./images/alien.png" class="alien" alt="alien" />';
+
+    openModalAlert("CONGRATULATIONS</br>You've found an alien on Mars&nbsp;!");
+
+    // Cancel existing timer
+    clearTimeout(timerId);
+  }
 }
 
 // Update rover information
@@ -99,6 +143,12 @@ const resetGridAndInfo = () => {
   rover.y = 0;
 
   updateGridAndInfo(rover.x, rover.y);
+  randomlyHideAlien();
+
+  // Cancel existing timer
+  clearTimeout(timerId);
+
+  startTimer();
 };
 
 resetButton.addEventListener("click", resetGridAndInfo);
@@ -148,7 +198,7 @@ function moveForward(rover) {
   switch (rover.direction) {
     case "N":
       if (rover.x === 0) {
-        openAlertModal("You can't move forward&nbsp;!");
+        openModalAlert("You can't move forward&nbsp;!");
         return;
       }
       rover.x--;
@@ -156,7 +206,7 @@ function moveForward(rover) {
 
     case "E":
       if (rover.y === gridSize - 1) {
-        openAlertModal("You can't move forward&nbsp;!");
+        openModalAlert("You can't move forward&nbsp;!");
         return;
       }
       rover.y++;
@@ -164,7 +214,7 @@ function moveForward(rover) {
 
     case "S":
       if (rover.x === gridSize - 1) {
-        openAlertModal("You can't move forward&nbsp;!");
+        openModalAlert("You can't move forward&nbsp;!");
         return;
       }
       rover.x++;
@@ -172,7 +222,7 @@ function moveForward(rover) {
 
     case "W":
       if (rover.y === 0) {
-        openAlertModal("You can't move forward&nbsp;!");
+        openModalAlert("You can't move forward&nbsp;!");
         return;
       }
       rover.y--;
@@ -189,7 +239,7 @@ function moveBackward(rover) {
   switch (rover.direction) {
     case "N":
       if (rover.x === gridSize - 1) {
-        openAlertModal("You can't move backward&nbsp;!");
+        openModalAlert("You can't move backward&nbsp;!");
         return;
       }
       rover.x++;
@@ -197,7 +247,7 @@ function moveBackward(rover) {
 
     case "E":
       if (rover.y === 0) {
-        openAlertModal("You can't move backward&nbsp;!");
+        openModalAlert("You can't move backward&nbsp;!");
         return;
       }
       rover.y--;
@@ -205,7 +255,7 @@ function moveBackward(rover) {
 
     case "S":
       if (rover.x === 0) {
-        openAlertModal("You can't move backward&nbsp;!");
+        openModalAlert("You can't move backward&nbsp;!");
         return;
       }
       rover.x--;
@@ -213,7 +263,7 @@ function moveBackward(rover) {
 
     case "W":
       if (rover.y === gridSize - 1) {
-        openAlertModal("You can't move backward&nbsp;!");
+        openModalAlert("You can't move backward&nbsp;!");
         return;
       }
       rover.y++;
@@ -260,16 +310,16 @@ const modalContainer = document.querySelector("#modal-container");
 const alertMessage = document.querySelector(".alert-message");
 const closeButtons = document.querySelectorAll(".close-button");
 
-function openAlertModal(message) {
+function openModalAlert(message) {
   modalContainer.style.display = "block";
   alertMessage.innerHTML = message;
 
   closeButtons.forEach((button) =>
-    button.addEventListener("click", closeAlertModal)
+    button.addEventListener("click", closeModalAlert)
   );
 }
 
-function closeAlertModal() {
+function closeModalAlert() {
   modalContainer.style.display = "none";
 }
 
@@ -283,7 +333,7 @@ function handleOrientationChange() {
     closeButtons.forEach((button) => (button.style.display = "none"));
     alertMessage.style.marginBottom = "0";
 
-    openAlertModal("Landscape mode is not allowed.");
+    openModalAlert("Landscape mode is not allowed.");
     // Force portrait mode
     screen.orientation.lock("portrait");
   } else {
@@ -292,7 +342,7 @@ function handleOrientationChange() {
     alertMessage.style.marginBottom = "20px";
 
     // In portrait mode, close modal
-    closeAlertModal();
+    closeModalAlert();
   }
 }
 

@@ -146,12 +146,22 @@ h1 {
   font-family: "Orbitron bold";
 }
 
+#start {
+  width: 250px;
+  height: 70px;
+  border: none;
+  font-family: "Orbitron bold";
+  font-size: 25px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: darkred;
+  cursor: pointer;
+}
+
 footer {
   width: 100%;
   padding: 10px;
 }
 
-/* Modal */
 #modal-container {
   display: none;
   position: fixed;
@@ -201,7 +211,6 @@ footer {
   color: darkred;
 }
 
-/* Alien */
 .alien {
   z-index: 10;
 }

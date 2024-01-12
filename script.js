@@ -3,41 +3,55 @@ const MIN_GRID_SIZE = 8;
 const MAX_GRID_SIZE = 10;
 
 // Select game elements
+const startButton = document.querySelector("#start");
 const grid = document.querySelector("#board-grid");
 const arrowGrid = document.querySelector("#arrow-grid");
 const arrowButtons = document.querySelectorAll(".arrow");
+const resetButton = document.createElement("div");
 const roverInfo = document.querySelector("#rover-info");
 const alienImg = document.querySelector(".alien");
 
-// Other global variables
+// Set rover object
 const rover = {
   direction: "N",
   x: 0, // x = row index
   y: 0, // y = column index
 };
 
-let gameOver = false;
+// Other global variables
+let gameStarted;
 let alienFound = false;
 let timerId;
+let timerPaused = false;
 
-// Display initial grid and start a 30-second timer
+// Display initial grid on loading page
 displayInitialGrid();
 
 function displayInitialGrid() {
   initGrid();
   updateGridAndInfo(rover.x, rover.y);
-  randomlyHideAlien(); // Hide alien on initial grid setup
-  startTimer(); // Start the timer after hiding the alien
+  randomlyHideAlien();
 }
 
+// Handle click on start button
+startButton.addEventListener("click", () => {
+  gameStarted = true;
+  startTimer();
+});
+
 function startTimer() {
+  if (timerPaused) return; // If timer is paused, do nothing
+
   timerId = setTimeout(() => {
     if (!alienFound) {
-      gameOver = true;
-
       openModalAlert(
-        "GAME OVER</br>You didn't find the alien within the deadline&nbsp;!"
+        "GAME OVER</br>You didn't find the alien within the deadline &#128125&nbsp;!"
       );
+
+      resetGridAndInfo();
+
+      // End game
+      gameStarted = false;
     }
   }, 30000);
 }
@@ -77,7 +91,7 @@ function updateGrid() {
   const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => (cell.textContent = ""));
 
-  // Calculate index of cell corresponding to current position of rover
+  // Calculate index of cell depending on rover current position
   const gridSize = getGridSize();
   const roverCellIndex = rover.x * gridSize + rover.y;
   const roverCell = cells[roverCellIndex];
@@ -85,16 +99,24 @@ function updateGrid() {
 
   // Check if rover is on a cell with alien
   if (roverCell.classList.contains("has-alien")) {
-    gameOver = false;
-    alienFound = true;
+    alienFound = true; // User won
 
+    // Display image
     roverCell.innerHTML =
       '<img src="./images/alien.png" class="alien" alt="alien" />';
 
-    openModalAlert("CONGRATULATIONS</br>You've found an alien on Mars&nbsp;!");
-
-    // Cancel existing timer
+    // Clear existing timer
     clearTimeout(timerId);
+
+    openModalAlert(
+      `CONGRATULATIONS</br>You've found an alien on Mars at position ${rover.x}/${rover.y} &#128125&#127881&nbsp;!`
+    );
+
+    // End game
+    gameStarted = false;
+
+    // // Call resetGridAndInfo after 5 seconds
+    // setTimeout(() => resetGridAndInfo(), 5000);
   }
 }
 
@@ -126,34 +148,36 @@ function updateGridAndInfo(indexRow, indexColumn) {
 // Handle rover moves with arrow buttons
 arrowButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const direction = button.classList[1]; // Extracts direction from class (2 classes on button :'arrow' & '[direction_name]')
-    pilotRover(direction.charAt(0)); // First letter of direction
+    const direction = button.classList[1]; // Extracts direction from 2nd class on button (1st one being 'arrow')
+    pilotrover(direction.charAt(0)); // First letter of direction
   });
 });
 
 // Reset grid and info
-const resetButton = document.createElement("div");
 resetButton.classList.add("reset");
 resetButton.textContent = "R";
 arrowGrid.append(resetButton);
 
 const resetGridAndInfo = () => {
-  rover.direction = "N";
+  // Neutralize reset button if game has not started
+  if (!gameStarted) {
+    openModalAlert("Click on 'Start Game' to start piloting the rover.");
+    return;
+  }
+
+  // Initialize rover position and direction
   rover.x = 0;
   rover.y = 0;
+  rover.direction = "N";
 
   updateGridAndInfo(rover.x, rover.y);
   randomlyHideAlien();
-
-  // Cancel existing timer
-  clearTimeout(timerId);
-
-  startTimer();
 };
 
+// Handle click on reset button
 resetButton.addEventListener("click", resetGridAndInfo);
 
-// Rover directions and moves
+// rover directions and moves
 function turnLeft() {
   switch (rover.direction) {
     case "N":
@@ -274,8 +298,14 @@ function moveBackward(rover) {
   }
 }
 
-// Rover driving
-function pilotRover(move) {
+// rover driving
+function pilotrover(move) {
+  // Neutralize arrow buttons if game has not started
+  if (!gameStarted) {
+    openModalAlert("Click on 'Start Game' to start piloting the rover.");
+    return;
+  }
+
   switch (move) {
     case "l":
       turnLeft();
@@ -313,6 +343,7 @@ const closeButtons = document.querySelectorAll(".close-button");
 function openModalAlert(message) {
   modalContainer.style.display = "block";
   alertMessage.innerHTML = message;
+  timerPaused = true; // Pause timer
 
   closeButtons.forEach((button) =>
     button.addEventListener("click", closeModalAlert)
@@ -321,6 +352,7 @@ function openModalAlert(message) {
 
 function closeModalAlert() {
   modalContainer.style.display = "none";
+  timerPaused = false; // Resume timer
 }
 
 // Handle orientation change depending on screen width

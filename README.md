@@ -12,7 +12,6 @@ This project is an interactive application that allows a user to control a rover
   - [Commands](#commands)
 - [Run the project locally](#run-the-project-locally)
 - [Contributing](#contributing)
-- [Possible Enhancements](#possible-enhancements)
 - [Stay Updated](#stay-updated)
 - [Contact](#contact)
 
@@ -57,14 +56,6 @@ Use the visual buttons to move the rover :
 
 - If you're interested in contributing, explore the project's structure in the HTML, CSS, and JavaScript files.
 - Feel free to make improvements, fix bugs, or suggest new features.
-
-## Possible Enhancements
-
-- Animations for Rover movements.
-- Enhanced error handling with interactive messages.
-- Restricting certain commands based on direction.
-- Obstacle mode with randomly placed obstacles on the grid.
-- Etc.
 
 ## Stay updated
 

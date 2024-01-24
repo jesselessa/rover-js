@@ -29,10 +29,12 @@ This project has been created with HTML, CSS and JavaScript.
 
 ## Features
 
-- Left and right rotations.
-- Forward and backward movements.
-- Current position and direction.
-- Resetting the grid.
+- Rover left and right rotations.
+- Rover forward and backward movements.
+- Rover current position and direction.
+- Resetting grid and rover information.
+- Timer to launch game.
+- Background music.
 
 ## How to play
 
@@ -44,7 +46,7 @@ Use the visual buttons to move the rover :
 - ![backward](./images/backward-24.png) : Move backward in the opposite direction.
 - ![left](./images/left-24.png) : Turn to the left.
 - ![right](./images/right-24.png) : Turn to the right.
-- ![reset](./images/reset-24.png) : Reset the position and orientation.
+- ![reset](./images/reset-24.png) : Reset position and orientation.
 
 ## Run the project locally
 

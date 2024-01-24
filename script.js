@@ -4,6 +4,7 @@ const MAX_GRID_SIZE = 10;
 
 // Select game elements
 const startButton = document.querySelector("#start");
+const gameRules = document.querySelector("#game-rules");
 const grid = document.querySelector("#board-grid");
 const arrowGrid = document.querySelector("#arrow-grid");
 const arrowButtons = document.querySelectorAll(".arrow");
@@ -66,6 +67,13 @@ startButton.addEventListener("click", () => {
   else {
     openModalAlert("Game still in progress.");
   }
+});
+
+// Handle click on game rules button
+gameRules.addEventListener("click", () => {
+  openModalAlert(
+    "<span>How to play ? *</span><br/><br/>Click on 'Start game' button to start piloting the rover by using the directional arrows, in order to find the alien hidden on Mars in less than 30 seconds.<br/><br/>Click on 'R' button to reset the grid.<br/><br/>You can turn the background music on/off by clicking on the loudspeaker icon.<br/><br/><span>*</span> <span  class='ux'>For a better user experience, it is recommended to play this game on a computer.</span>"
+  );
 });
 
 // Create a 30s-game timer

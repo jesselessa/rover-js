@@ -87,12 +87,25 @@ h1 {
   align-items: center;
 }
 
+.alien {
+  z-index: 10;
+}
+
 .arrows-rover-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 50%;
   gap: 50px;
+}
+
+.start-game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 50px;
+  cursor: pointer;
 }
 
 #start {
@@ -110,6 +123,43 @@ h1 {
 #start:active {
   transform: translateY(2px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#game-rules {
+  position: relative;
+  font-family: "Orbitron bold";
+  font-size: 50px;
+}
+
+.ux {
+  font-style: italic;
+  font-size: 18px;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 70px;
+  font-size: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: darkred;
+}
+
+#game-rules:active {
+  transform: translateY(2px);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#game-rules:hover .tooltip {
+  visibility: visible;
 }
 
 #arrow-grid {
@@ -161,7 +211,6 @@ h1 {
   z-index: 10;
 }
 
-/* Pressed effect */
 .arrow:active,
 .reset:active {
   transform: translateY(2px);
@@ -191,6 +240,7 @@ footer {
   padding: 10px;
 }
 
+/* Alert message */
 #modal-container {
   display: none;
   position: fixed;
@@ -212,7 +262,12 @@ footer {
 }
 
 .alert-message {
+  font-size: 20px;
   margin-bottom: 20px;
+}
+
+.alert-message span {
+  font-weight: bold;
 }
 
 .close-button {
@@ -240,10 +295,6 @@ footer {
   color: darkred;
 }
 
-.alien {
-  z-index: 10;
-}
-
 @media screen and (max-width: 1153px) {
   .grid-arrows-container {
     width: 100%;
@@ -252,6 +303,7 @@ footer {
     gap: 25px;
   }
   .board-grid-container,
+  .start-game,
   .arrows-rover-info {
     width: 100%;
   }
@@ -294,12 +346,16 @@ figcaption {
 }
 
 @media screen and (max-width: 485px) {
-  #board-grid {
-    grid-template-columns: repeat(8, 40px);
-  }
   .alert-message {
     font-size: 16px;
   }
+  #board-grid {
+    grid-template-columns: repeat(8, 40px);
+  }
+  .start-game {
+    gap: 25px;
+  }
+
   #toggle-music {
     width: 40px;
     height: 40px;

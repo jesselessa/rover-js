@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
-    <title>Rover Game</title>
+    <title>Rover vs Alien</title>
     <link rel="icon" href="./images/rover-favicon.png" type="image/png" />
   </head>
   <body>
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <h1>ROVER GAME</h1>
+      <h1>ROVER vs ALIEN</h1>
 
       <div class="grid-arrows-container">
         <div class="board-grid-container">
@@ -33,8 +33,13 @@
         </div>
 
         <div class="arrows-rover-info">
-          <!-- Start button -->
-          <button id="start">START GAME</button>
+          <div class="start-game">
+            <!-- Start button -->
+            <button id="start">START GAME</button>
+
+            <!-- Game rules -->
+            <p id="game-rules">?<span class="tooltip">Game Rules</span></p>
+          </div>
 
           <!-- Commands -->
           <div id="arrow-grid">

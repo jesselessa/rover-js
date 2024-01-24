@@ -10,6 +10,7 @@ This project is a game that allows a user to pilot a rover on a two-dimensional 
 - [Features](#features)
 - [How to play](#how-to-play)
   - [Commands](#commands)
+- [Credits](#credits)
 - [Run the project locally](#run-the-project-locally)
 - [Contributing](#contributing)
 - [Stay Updated](#stay-updated)
@@ -47,6 +48,10 @@ Use the visual buttons to move the rover :
 - ![left](./images/left-24.png) : Turn to the left.
 - ![right](./images/right-24.png) : Turn to the right.
 - ![reset](./images/reset-24.png) : Reset position and orientation.
+
+## Credits
+
+- Backgroud music : ['MARTIAN' by u_4bplvbk4dw](https://pixabay.com/fr/sound-effects/martian-131602/) (License : Pixabay Content License)
 
 ## Run the project locally
 

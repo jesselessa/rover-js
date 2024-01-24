@@ -67,8 +67,10 @@ startButton.addEventListener("click", () => {
       }
       // Game Over - Neutralize button
       else {
-        openModalAlert("Click on 'R' button to reset the grid.");
-        return;
+        if (firstGridDisplay) {
+          openModalAlert("Click on 'R' button to reset the grid.");
+          return;
+        }
       }
     }
   }
@@ -97,7 +99,7 @@ function startTimer() {
     if (timeLeft <= 0) {
       if (!alienFound) {
         openModalAlert(
-          "GAME OVER - You didn't find the alien within the deadline &#128125&nbsp;!<br/> Click on 'R' button to reset the grid."
+          "GAME OVER - You didn't find the alien within the deadline &#128125&nbsp;!"
         );
 
         gameStarted = false; // End game
@@ -163,7 +165,7 @@ function updateGrid() {
     clearTimeout(timerId);
 
     openModalAlert(
-      `CONGRATULATIONS - You've found an alien on Mars at position ${rover.x}/${rover.y} &#128125&#127881&nbsp;!</br>Click on 'R' button to reset the grid.`
+      `CONGRATULATIONS - You've found an alien on Mars at position ${rover.x}/${rover.y} &#128125&#127881&nbsp;!`
     );
 
     // End game

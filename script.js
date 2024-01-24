@@ -110,13 +110,14 @@ function startTimer() {
 
 // Randomly hide alien image under a grid cell
 function randomlyHideAlien() {
-  const randomIndex = Math.floor(Math.random() * cells.length);
-
-  cells.forEach((cell, index) => {
-    if (index === randomIndex) {
-      cell.classList.add("has-alien");
-    }
+  // Remove 'has-alien' class from all cells
+  cells.forEach((cell) => {
+    cell.classList.remove("has-alien");
   });
+
+  // Add 'has-alien' class to a random cell
+  const randomIndex = Math.floor(Math.random() * cells.length);
+  cells[randomIndex].classList.add("has-alien");
 }
 
 // Get grid size depending on screen width
@@ -221,10 +222,11 @@ function resetGridAndInfo() {
   rover.y = 0;
   rover.direction = "N";
 
-  // Update grid and hide alien
-  updateGridAndInfo(rover.x, rover.y);
+  // Hide alien and refresh its position
   randomlyHideAlien();
-  updateGrid();
+
+  // Update grid and rover info
+  updateGridAndInfo(rover.x, rover.y);
 }
 resetButton.addEventListener("click", resetGridAndInfo);
 
@@ -425,15 +427,16 @@ function handleOrientationChange() {
   const isSmallScreen = window.innerWidth <= 1000;
 
   if (isLandscape && isSmallScreen) {
-    // Custom modal
+    // Custom modal - Remove closure buttons
     closeButtons.forEach((button) => (button.style.display = "none"));
     alertMessage.style.marginBottom = "0";
 
-    openModalAlert("Landscape mode is not allowed.");
+    openModalAlert("Please, turn your device.");
+
     // Force portrait mode
     screen.orientation.lock("portrait");
   } else {
-    // Custom modal
+    // Custom modal - In portrait mode, closure buttons reappear
     closeButtons.forEach((button) => (button.style.display = "block"));
     alertMessage.style.marginBottom = "20px";
 

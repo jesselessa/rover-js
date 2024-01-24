@@ -1,6 +1,6 @@
 # rover-js
 
-This project is an interactive application that allows a user to control a rover on a virtual grid using directional buttons. The goal is to provide a fun experience while practicing basic programming concepts.
+This project is a game that allows a user to pilot a rover on a two-dimensional grid using directional buttons, in order to find an alien in a 30 seconds delay.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ This project is an interactive application that allows a user to control a rover
 
 ## Demo
 
-You can see a live demo of the project [here](https://jesselessa.github.io/rover-js/).
+You can play the game [here](https://jesselessa.github.io/rover-js/).
 
 ## Stack
 
@@ -56,7 +56,7 @@ Use the visual buttons to move the rover :
 
 ## Contributing
 
-- If you're interested in contributing, explore the project's structure in the HTML, CSS, and JavaScript files.
+- If you are interested in contributing, explore the project structure in the HTML, CSS, and JavaScript files.
 - Feel free to make improvements, fix bugs, or suggest new features.
 
 ## Stay updated

@@ -72,11 +72,11 @@ startButton.addEventListener("click", () => {
 // Handle click on game rules button
 gameRules.addEventListener("click", () => {
   openModalAlert(
-    "<span>How to play ? *</span><br/><br/>Click on 'Start game' button to start piloting the rover by using the directional arrows, in order to find the alien hidden on Mars in less than 30 seconds.<br/><br/>Click on 'R' button to reset the grid.<br/><br/>You can turn the background music on/off by clicking on the loudspeaker icon.<br/><br/><span>*</span> <span  class='ux'>For a better user experience, it is recommended to play this game on a computer.</span>"
+    "<span>How to play ? *</span><br/><br/>Click on 'Start game' button to start piloting the rover by using the directional arrows, in order to find the alien hidden on Mars in less than 30 seconds.<br/><br/>Click on 'R' button to reset the grid.<br/><br/>You can turn the background music on/off by clicking on the loudspeaker icon.<br/><br/><span>*</span> <span  class='ux'>For a better user experience, it is recommended to play this game on tablet or computer.</span>"
   );
 });
 
-// Create a 30s-game timer
+// Create a 30s timer
 function startTimer() {
   const endTime = Date.now() + 30000;
 
@@ -224,6 +224,7 @@ function resetGridAndInfo() {
   // Update grid and hide alien
   updateGridAndInfo(rover.x, rover.y);
   randomlyHideAlien();
+  updateGrid();
 }
 resetButton.addEventListener("click", resetGridAndInfo);
 
@@ -355,12 +356,15 @@ function pilotrover(move) {
     // Game won
     if (alienFound) {
       openModalAlert("Click on 'R' button to reset the grid.");
-    }
-    // Alien not found - Game not started yet or lost
-    else {
-      // Check if timer has been launched or not
-      if ((firstGridDisplay && !timerId) || (gridReset && !timerId)) {
+    } else {
+      // Either timer not launched and first grid display or new grid after reset or grid reset while timer still in progress
+      if (
+        (firstGridDisplay && !timerId) ||
+        (gridReset && !timerId) ||
+        gridReset
+      ) {
         openModalAlert("Click on 'Start game' to start piloting the rover.");
+        // Game Over - alien not found within the delay
       } else {
         openModalAlert("Click on 'R' button to reset the grid.");
       }

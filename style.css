@@ -33,13 +33,7 @@ body {
   justify-content: space-around;
   align-items: center;
   gap: 20px;
-  padding: 25px 10px;
-}
-
-h1 {
-  width: 100%;
-  color: orangered;
-  font-family: "Orbitron bold";
+  padding: 10px;
 }
 
 .grid-arrows-container {
@@ -56,6 +50,24 @@ h1 {
   flex-direction: column;
   align-items: center;
   width: 50%;
+}
+
+h1 {
+  width: 100%;
+  color: orangered;
+  font-family: "Orbitron bold";
+}
+
+.timer-display {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  margin-bottom: 10px;
+  gap: 5px;
+}
+
+#timer {
+  font-size: 30px;
 }
 
 #board-grid {
@@ -81,7 +93,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   width: 50%;
-  gap: 40px;
+  gap: 50px;
 }
 
 #arrow-grid {
@@ -213,10 +225,6 @@ footer {
 
 .alien {
   z-index: 10;
-}
-
-#timer-display {
-  font-size: 30px;
 }
 
 @media screen and (max-width: 1153px) {

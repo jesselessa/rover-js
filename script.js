@@ -10,7 +10,7 @@ const arrowButtons = document.querySelectorAll(".arrow");
 const resetButton = document.createElement("div");
 const roverInfo = document.querySelector("#rover-info");
 const alienImg = document.querySelector(".alien");
-const timerDisplay = document.getElementById("timer-display");
+const timer = document.getElementById("timer");
 
 // Set rover object
 const rover = {
@@ -86,10 +86,10 @@ function startTimer() {
         gameStarted = false; // End game
       }
 
-      timerDisplay.textContent = "0";
+      timer.textContent = "0";
     } else {
       // if (alienFound) gameStarted = false;
-      timerDisplay.textContent = secondsLeft;
+      timer.textContent = secondsLeft;
 
       // Update timer every second
       timerId = setTimeout(updateTimer, 1000);
@@ -206,7 +206,7 @@ function resetGridAndInfo() {
 
   // Clear existing timer and reset it to 30 seconds
   clearTimeout(timerId);
-  timerDisplay.textContent = "30";
+  timer.textContent = "30";
 
   // Initialize rover position and direction
   rover.x = 0;
@@ -352,7 +352,7 @@ function pilotrover(move) {
     else {
       // Check if timer has been launched or not
       if ((firstGridDisplay && !timerId) || (gridReset && !timerId)) {
-        openModalAlert("Click on 'Start game' to start playing.");
+        openModalAlert("Click on 'Start game' to start piloting the rover.");
       } else {
         openModalAlert("Click on 'R' button to reset the grid.");
       }

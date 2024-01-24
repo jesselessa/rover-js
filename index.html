@@ -22,15 +22,21 @@
 
       <div class="grid-arrows-container">
         <div class="board-grid-container">
+          <!-- Timer -->
+          <div class="timer-display">
+            <p>Remaining time&nbsp;:</p>
+            <div id="timer">30</div>
+          </div>
+
+          <!-- Game grid -->
           <div id="board-grid"></div>
         </div>
 
         <div class="arrows-rover-info">
+          <!-- Start button -->
           <button id="start">START GAME</button>
 
-          <!-- Timer -->
-          <div id="timer-display">30</div>
-
+          <!-- Commands -->
           <div id="arrow-grid">
             <img
               src="./images/forward.png"
@@ -56,6 +62,7 @@
         Your browser does not support the audio element.
       </audio>
 
+      <!-- Music on/off -->
       <div id="toggle">
         <img src="./images/sound-on.png" id="toggle-music" />
         <figcaption></figcaption>

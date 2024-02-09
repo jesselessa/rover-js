@@ -2,7 +2,7 @@
 const MIN_GRID_SIZE = 8;
 const MAX_GRID_SIZE = 10;
 
-// Select game elements
+// Global variables related to game logic
 const startButton = document.querySelector("#start");
 const gameRules = document.querySelector("#game-rules");
 const grid = document.querySelector("#board-grid");
@@ -10,12 +10,9 @@ const arrowGrid = document.querySelector("#arrow-grid");
 const arrowButtons = document.querySelectorAll(".arrow");
 const resetButton = document.createElement("div");
 const roverInfo = document.querySelector("#rover-info");
-const timer = document.getElementById("timer");
+const timer = document.querySelector("#timer");
 let cells;
 
-// Other global variables
-let firstGridDisplay;
-let gridReset;
 let gameStarted;
 let alienFound;
 let timerId; // ID returned by setTimeout
@@ -32,14 +29,13 @@ displayInitialGrid();
 
 function displayInitialGrid() {
   // Initialize states
-  firstGridDisplay = true;
-  gridReset = false;
   gameStarted = false;
   alienFound = false;
+  timerId = undefined;
 
   initGrid();
 
-  // Declare 'cells' here after DOM is loaded to prevent error message saying 'textContent' property in updateGrid function has a value 'undefined'
+  // Declare 'cells' here after DOM is loaded to prevent error message saying 'textContent' property has a value 'undefined' in updateGrid function
   cells = document.querySelectorAll(".cell");
 
   updateGridAndInfo(rover.x, rover.y);
@@ -49,32 +45,26 @@ function displayInitialGrid() {
 // Handle click on start button
 startButton.addEventListener("click", () => {
   if (!gameStarted) {
-    // Game won - Neutralise button
+    // Game won (end of game)
     if (alienFound) {
       openModalAlert("Click on 'R' button to reset the grid.");
       return;
     }
-    // Alien not found
+    // Game lost (end of game) or not started yet
     else {
-      // Launch game in 3 cases : timer not launched + first grid display/timer not launched + new grid after reset/grid reset while game was still in progress
-      if (
-        (firstGridDisplay && !timerId) ||
-        (gridReset && !timerId) ||
-        gridReset
-      ) {
+      // Game not started yet - Launch game
+      if (!timerId) {
         gameStarted = true;
         startTimer();
       }
-      // Game Over - Neutralize button
+      // Game lost at delay expiration - Neutralize button
       else {
-        if (firstGridDisplay) {
-          openModalAlert("Click on 'R' button to reset the grid.");
-          return;
-        }
+        openModalAlert("Click on 'R' button to reset the grid.");
+        return;
       }
     }
   }
-  // If game has already started
+  // Game in progress
   else {
     openModalAlert("Game still in progress.");
   }
@@ -105,12 +95,26 @@ function startTimer() {
         gameStarted = false; // End game
       }
 
-      timer.textContent = "0"; // Update timer text
-    } else {
-      timer.textContent = secondsLeft;
+      // Update timer text
+      timer.textContent = "0";
+    }
+    // Remaining time
+    else {
+      if (alienFound) {
+        // Clear existing timer
+        if (timerId) clearTimeout(timerId);
 
-      // Update timer every second
-      timerId = setTimeout(updateTimer, 1000);
+        openModalAlert(
+          `CONGRATULATIONS - You've found an alien on Mars at position ${rover.x}/${rover.y} &#128125&#127881&nbsp;!`
+        );
+
+        // End game
+        gameStarted = false;
+      } else {
+        // Update timer every second
+        timerId = setTimeout(updateTimer, 1000);
+        timer.textContent = secondsLeft;
+      }
     }
   }
 
@@ -160,16 +164,6 @@ function updateGrid() {
     // Display image
     roverCell.innerHTML =
       '<img src="./images/alien.png" class="alien" alt="alien" />';
-
-    // Clear existing timer
-    clearTimeout(timerId);
-
-    openModalAlert(
-      `CONGRATULATIONS - You've found an alien on Mars at position ${rover.x}/${rover.y} &#128125&#127881&nbsp;!`
-    );
-
-    // End game
-    gameStarted = false;
   }
 }
 
@@ -212,20 +206,21 @@ resetButton.textContent = "R";
 arrowGrid.append(resetButton);
 
 function resetGridAndInfo() {
+  // Clear existing timer
+  if (timerId) clearTimeout(timerId);
+
   // Reset states
-  firstGridDisplay = false;
-  gridReset = true;
   gameStarted = false;
   alienFound = false;
-
-  // Clear existing timer and reset it to 30 seconds
-  clearTimeout(timerId);
-  timer.textContent = "30";
+  timerId = undefined;
 
   // Initialize rover position and direction
   rover.x = 0;
   rover.y = 0;
   rover.direction = "N";
+
+  // Reset timer to 30 seconds
+  timer.textContent = "30";
 
   // Ensure position of alien image is renewed
   cells.forEach((cell) => {
@@ -360,22 +355,24 @@ function moveBackward(rover) {
 
 // Pilot the rover
 function pilotRover(move) {
-  // Neutralize commands if gameStarted set to 'false'
   if (!gameStarted) {
+    // Game won (end of game)
     if (alienFound) {
       openModalAlert("Click on 'R' button to reset the grid.");
-    } else {
-      if (
-        (firstGridDisplay && !timerId) ||
-        (gridReset && !timerId) ||
-        gridReset
-      ) {
-        openModalAlert("Click on 'Start game' to start piloting the rover.");
-        // Game Over - alien not found within the delay
-      } else {
+    }
+    // Alien not found
+    else {
+      // Game not started yet
+      if (!timerId) {
+        openModalAlert("Click on 'Start Game' to start piloting the rover.");
+      }
+      // Game lost (end of game)
+      else {
         openModalAlert("Click on 'R' button to reset the grid.");
       }
     }
+
+    // Neutralize commands if 'gameStarted' is falsy
     return;
   }
 

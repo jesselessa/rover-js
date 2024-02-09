@@ -122,16 +122,24 @@ function startTimer() {
   updateTimer();
 }
 
-// Randomly hide alien image under a grid cell
-function randomlyHideAlien() {
-  // Add 'has-alien' class to a random cell
-  const randomIndex = Math.floor(Math.random() * cells.length);
-  cells[randomIndex].classList.add("has-alien");
-}
-
 // Get grid size depending on screen width
 function getGridSize() {
   return window.innerWidth <= 485 ? MIN_GRID_SIZE : MAX_GRID_SIZE;
+}
+
+// Randomly hide alien under a grid cell except at position 0/0
+function randomlyHideAlien() {
+  const gridSize = getGridSize();
+  let randomX, randomY;
+
+  do {
+    randomX = Math.floor(Math.random() * gridSize);
+    randomY = Math.floor(Math.random() * gridSize);
+  } while (randomX === 0 && randomY === 0);
+
+  const randomIndex = randomX * gridSize + randomY;
+  // Add 'has-alien' class to a random cell
+  cells[randomIndex].classList.add("has-alien");
 }
 
 // Generate grid

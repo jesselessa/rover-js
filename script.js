@@ -17,7 +17,6 @@ let gameStarted;
 let alienFound;
 let timerId; // ID returned by setTimeout
 
-// Set rover object
 const rover = {
   x: 0, // x = row index
   y: 0, // y = column index
@@ -128,6 +127,7 @@ function getGridSize() {
 }
 
 // Randomly hide alien under a grid cell except at position 0/0
+//! Note : index of a cell in a 2D grid : index = x * m + y (where x = row index, y = column index, n = number of rows and m = number of columns)
 function randomlyHideAlien() {
   const gridSize = getGridSize();
   let randomX, randomY;
@@ -240,7 +240,7 @@ function resetGridAndInfo() {
 }
 resetButton.addEventListener("click", resetGridAndInfo);
 
-// rover directions and moves
+// Rover directions and moves
 function turnLeft() {
   switch (rover.direction) {
     case "N":

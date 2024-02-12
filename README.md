@@ -30,12 +30,12 @@ This project has been created with HTML, CSS and JavaScript.
 
 ## Features
 
-- Rover **left and right rotations**.
-- Rover **forward and backward movements**.
-- Rover **current position and direction**.
-- **Reset of the grid** and rover information.
-- **Timer** to launch game.
-- **Background music**.
+- Rover left and right rotations.
+- Rover forward and backward movements.
+- Rover current position and direction.
+- Reset of the grid and rover information.
+- Timer to launch game.
+- Background music.
 
 ## How to play
 

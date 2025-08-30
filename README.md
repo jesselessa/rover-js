@@ -18,7 +18,7 @@ This project is a game that allows a user to pilot a rover on a two-dimensional 
 
 ## Demo
 
-You can play the game [here](https://jesselessa.github.io/rover-js/).
+You can play the game [here](https://www.rover.jesselessa.dev).
 
 ## Stack
 

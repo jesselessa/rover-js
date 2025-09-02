@@ -157,21 +157,46 @@ function initGrid() {
 
 // Update grid with rover position
 function updateGrid() {
-  cells.forEach((cell) => (cell.textContent = ""));
+  // Clear all cells content (remove text or images)
+  cells.forEach((cell) => (cell.innerHTML = ""));
 
-  // Calculate index of cell depending on rover current position
+  // Calculate the current rover position
   const gridSize = getGridSize();
   const roverCellIndex = rover.x * gridSize + rover.y;
   const roverCell = cells[roverCellIndex];
-  roverCell.textContent = rover.direction;
 
-  // Check if rover is on a cell with alien
+  // If the rover is on a cell with an alien, display the alien image
   if (roverCell.classList.contains("has-alien")) {
-    alienFound = true; // User won
-
-    // Display image
+    alienFound = true;
+    // Display the alien image
     roverCell.innerHTML =
       '<img src="./images/alien.png" class="alien" alt="alien" />';
+  } else {
+    // Display the rover image
+    roverCell.innerHTML = `<img src="./images/mars-rover.png" class="rover" alt="rover" />`;
+
+    // Apply rotation based on the rover's direction
+    const roverImg = roverCell.querySelector(".rover");
+    let rotation = 0;
+
+    switch (rover.direction) {
+      case "N":
+        rotation = 0; // Facing North (default)
+        break;
+      case "E":
+        rotation = 90; // East
+        break;
+      case "S":
+        rotation = 180; // South
+        break;
+      case "W":
+        rotation = 270; // West
+        break;
+    }
+
+    // Apply CSS transform to rotate the image smoothly
+    roverImg.style.transform = `rotate(${rotation}deg)`;
+    roverImg.style.transition = "transform 0.3s ease";
   }
 }
 
@@ -431,33 +456,33 @@ function closeModalAlert() {
   modalContainer.style.display = "none";
 }
 
-// Handle orientation change depending on screen width
-function handleOrientationChange() {
-  const isLandscape = window.matchMedia("(orientation: landscape)").matches;
-  const isSmallScreen = window.innerWidth <= 1000;
+// Handle screen size for PC-only gameplay
+function handleScreenSize() {
+  const isTooSmall = window.innerWidth < 1153;
+  const appContainer = document.getElementById("app");
 
-  if (isLandscape && isSmallScreen) {
-    // Custom modal - Remove closure buttons
+  if (isTooSmall) {
+    // Remove close buttons so user cannot bypass the restriction
     closeButtons.forEach((button) => (button.style.display = "none"));
     alertMessage.style.marginBottom = "0";
 
-    openModalAlert("Please, turn your device.");
-
-    // Force portrait mode
-    screen.orientation.lock("portrait");
+    // Display message
+    openModalAlert(
+      "This game is only available on PC. Please, use a larger screen."
+    );
   } else {
-    // Custom modal - In portrait mode, closure buttons reappear
+    // Restore close buttons when screen is wide enough
     closeButtons.forEach((button) => (button.style.display = "block"));
     alertMessage.style.marginBottom = "20px";
 
-    // Close modal automatically in portrait mode
+    // Close modal automatically when conditions are met
     closeModalAlert();
   }
 }
-window.addEventListener("orientationchange", handleOrientationChange);
 
-// Force message to appear as soon as screen width changes
-window.addEventListener("resize", handleOrientationChange);
+// Trigger the check on page load and on resize
+window.addEventListener("load", handleScreenSize);
+window.addEventListener("resize", handleScreenSize);
 
 // Handle background music
 const backgroundMusic = document.querySelector("#background-music");
@@ -484,7 +509,7 @@ function updateCaption() {
     caption.textContent = backgroundMusic.paused ? "Sound on" : "Sound off";
   }
 }
-updateCaption(); // Actualize caption on loading page
+updateCaption(); // Update caption on page load
 
 toggleDiv.addEventListener("click", handleMusicBg);
 window.addEventListener("resize", updateCaption);

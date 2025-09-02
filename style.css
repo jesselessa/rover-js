@@ -90,6 +90,11 @@ h1 {
   align-items: center;
 }
 
+.rover {
+  width: 32px;
+  height: 32px;
+}
+
 .alien {
   z-index: 10;
 }
@@ -209,7 +214,6 @@ footer {
 
 /* Alert message */
 #modal-container {
-  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -220,11 +224,15 @@ footer {
 }
 
 .modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 80%;
   color: black;
   background-color: #fefefe;
   padding: 20px;
-  margin: 15% auto;
+  border-radius: 10px;
   opacity: 0.9;
 }
 
@@ -318,87 +326,6 @@ figcaption {
   font-size: 16px;
 }
 
-/*!---------- Media queries ----------*/
-@media screen and (max-width: 1153px) {
-  .grid-arrows-container {
-    width: 100%;
-    flex-direction: column;
-    padding: 0 10px;
-    gap: 25px;
-  }
-  .board-grid-container,
-  .start-game,
-  .arrows-rover-info {
-    width: 100%;
-  }
-  #board-grid {
-    grid-template-columns: repeat(10, 40px);
-  }
-  .cell,
-  .alien {
-    width: 40px;
-    height: 40px;
-  }
-  .arrows-rover-info {
-    gap: 20px;
-  }
-  .arrow,
-  .reset {
-    width: 95px;
-    height: 95px;
-  }
-  .reset {
-    font-size: 50px;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  #game-rules,
-  .tooltip {
-    right: 15px;
-  }
-  .tooltip {
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 485px) {
-  .alert-message {
-    font-size: 16px;
-  }
-  .ux {
-    font-size: 15px;
-  }
-  #board-grid {
-    grid-template-columns: repeat(8, 40px);
-  }
-  .start-game {
-    gap: 25px;
-  }
-  #game-rules,
-  .tooltip {
-    right: 10px;
-  }
-  #toggle-music {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .timer-display p,
-  #timer {
-    font-size: 25px;
-  }
-  #board-grid {
-    grid-template-columns: repeat(8, 33px);
-  }
-  .cell,
-  .alien {
-    width: 33px;
-    height: 33px;
-  }
-  .cell {
-    font-size: 25px;
-  }
+.hidden {
+  display: none !important;
 }

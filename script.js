@@ -72,7 +72,7 @@ startButton.addEventListener("click", () => {
 // Handle click on game rules button
 gameRules.addEventListener("click", () => {
   openModalAlert(
-    "<span>How to play ? *</span><br/><br/>Click on 'Start game' button to start piloting the rover by using the directional arrows, in order to find the alien hidden on Mars in less than 30 seconds.<br/><br/>Click on 'R' button to reset the grid.<br/><br/>You can turn the background music on/off by clicking on the loudspeaker icon.<br/><br/><span>*</span> <span  class='ux'>For a better user experience, it is recommended to play this game on tablet or computer.</span>"
+    "<span>How to play ? *</span><br/><br/>Click on 'Start game' button to start piloting the rover by using the directional arrows and try to find the alien hidden on Mars in less than 30 seconds.<br/><br/>Click on 'R' button to reset the grid.<br/><br/>You can turn the background music on/off by clicking on the loudspeaker icon.<br/><br/><span>*</span>"
   );
 });
 

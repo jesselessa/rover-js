@@ -442,10 +442,12 @@ year.append(date);
 const modalContainer = document.querySelector("#modal-container");
 const alertMessage = document.querySelector(".alert-message");
 const closeButtons = document.querySelectorAll(".close-button");
+const okButton = document.querySelector(".ok");
 
 function openModalAlert(message) {
   modalContainer.style.display = "block";
   alertMessage.innerHTML = message;
+  okButton.textContent = "OK";
 
   closeButtons.forEach((button) =>
     button.addEventListener("click", closeModalAlert)

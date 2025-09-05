@@ -214,6 +214,7 @@ footer {
 
 /* Alert message */
 #modal-container {
+  display: none;
   position: fixed;
   left: 0;
   top: 0;

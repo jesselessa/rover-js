@@ -1,6 +1,6 @@
 # rover-js
 
-This project is a game that allows a user to pilot a rover on a two-dimensional grid using directional buttons, in order to find an alien in a 30 seconds delay.
+This game allows you to pilot a rover on a two-dimensional grid by using the directional arrows with your mouse or your keyboard in order to find an alien hidden on Mars in less than 30 seconds.
 
 ## Table of Contents
 
@@ -30,18 +30,17 @@ This project has been created with HTML, CSS and JavaScript.
 
 ## Features
 
-- Rover left and right rotations.
-- Rover forward and backward movements.
-- Rover current position and direction.
-- Reset of the grid and rover information.
-- Timer to launch game.
-- Background music.
+- Launch the timer to start a new game.
+- Pilot the rover with your mouse or your keyboard
+- Display rover current position and direction.
+- Reset the grid to reset the rover position.
+- Turn on/off the background music.
 
 ## How to play
 
 ### Commands
 
-Use the visual buttons to move the rover :
+Use the visual buttons to move the rover (or the arrows keys on your keyboard) :
 
 - ![forward](./images/forward-24.png) : Move forward in the current direction.
 - ![backward](./images/backward-24.png) : Move backward in the opposite direction.

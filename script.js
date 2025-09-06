@@ -142,49 +142,60 @@ function randomlyHideAlien() {
 // CREATE AND START TIMER
 // =======================
 
-function startTimer() {
-  const endTime = Date.now() + 30000; // 30 seconds from now
+let timeLeft; // Remaining time in milliseconds (1000ms = 1s)
+
+function startTimer(initialTime = 30000) {
+  timeLeft = initialTime; // Default to 30 seconds
+  const endTime = Date.now() + initialTime;
 
   // Update timer every second
   function updateTimer() {
     const now = Date.now();
-    const timeLeft = endTime - now;
+    timeLeft = endTime - now;
     const secondsLeft = Math.ceil(timeLeft / 1000);
 
     if (timeLeft <= 0) {
+      timer.textContent = "0";
+      gameStarted = false; // Game ended
+
+      revealAlien();
+
       if (!alienFound) {
         openModalAlert(
           "GAME OVER - You didn't find the alien within the deadline &#128125&nbsp;!" // Unicode for alien emoji
         );
-
-        gameStarted = false; // End game
       }
-
-      // Update timer text
-      timer.textContent = "0";
+      return;
     }
-    // Remaining time
-    else {
-      if (alienFound) {
-        // Clear existing timer
-        if (timerId) clearTimeout(timerId);
 
-        openModalAlert(
-          `CONGRATULATIONS - You've found an alien on Mars at position ${rover.x}/${rover.y} &#128125&#127881&nbsp;!` // Unicode for alien and party popper emojis
-        );
+    // If remaining time
+    if (alienFound) {
+      // Clear existing timer
+      if (timerId) clearTimeout(timerId);
+      gameStarted = false;
 
-        // End game
-        gameStarted = false;
-      } else {
-        // Update timer every second
-        timerId = setTimeout(updateTimer, 1000);
-        timer.textContent = secondsLeft;
-      }
+      revealAlien();
+
+      openModalAlert(
+        `CONGRATULATIONS - You've found the alien on Mars at position ${rover.x}/${rover.y} &#128125&#127881&nbsp;!` // Unicode for alien and party popper emojis
+      );
+      return;
     }
+
+    // If alien not found and game still in progress
+    timer.textContent = secondsLeft;
+    timerId = setTimeout(updateTimer, 1000); // Update timer every second
   }
 
   // Start initial timer
   updateTimer();
+}
+
+function revealAlien() {
+  const alienCell = document.querySelector(".has-alien");
+  if (alienCell)
+    alienCell.innerHTML =
+      '<img src="./images/alien.png" class="alien" alt="alien" />';
 }
 
 // =======================
@@ -210,12 +221,12 @@ startButton.addEventListener("click", () => {
         document.body.setAttribute("tabindex", "0"); // Make body focusable and able to capture keyboard events
         document.body.focus();
         window.addEventListener("keydown", handleKeyboard);
+        return; // Not open modal
       }
+
       // Game lost at delay expiration - Neutralize 'Start game' button
-      else {
-        openModalAlert("Click on 'R' button to reset the grid.");
-        return;
-      }
+      openModalAlert("Click on 'R' button to reset the grid.");
+      return;
     }
   }
   // Game in progress
@@ -254,6 +265,7 @@ function resetGridAndInfo() {
 
   // Reset timer to 30 seconds
   timer.textContent = "30";
+  timeLeft = 30000; // Reset remaining time to initial value
 
   // Ensure position of alien image is renewed
   cells.forEach((cell) => {
@@ -474,8 +486,23 @@ function openModalAlert(message) {
   alertMessage.innerHTML = message;
   okButton.textContent = "OK";
 
-  closeButtons.forEach((button) =>
-    button.addEventListener("click", closeModalAlert)
+  // Pause timer if game is in progress
+  if (timerId) {
+    clearTimeout(timerId);
+    timerId = null;
+  }
+
+  closeButtons.forEach(
+    (button) =>
+      button.addEventListener(
+        "click",
+        () => {
+          closeModalAlert();
+          // Resume timer if game is in progress
+          if (gameStarted && timeLeft > 0) startTimer(timeLeft);
+        },
+        { once: true }
+      ) // Set listener to execute only once
   );
 }
 
@@ -518,31 +545,17 @@ window.addEventListener("resize", handleScreenSize);
 const backgroundMusic = document.querySelector("#background-music");
 const toggleDiv = document.querySelector("#toggle");
 const toggleMusicBtn = document.querySelector("#toggle-music");
-const caption = document.querySelector("figcaption");
 
 function handleMusicBg() {
   if (backgroundMusic.paused) {
     backgroundMusic.play();
     toggleMusicBtn.src = "./images/sound-off.png";
-    updateCaption();
   } else {
     backgroundMusic.pause();
     toggleMusicBtn.src = "./images/sound-on.png";
-    updateCaption();
   }
 }
-
-function updateCaption() {
-  if (window.innerWidth <= 700) {
-    caption.textContent = "";
-  } else {
-    caption.textContent = backgroundMusic.paused ? "Sound on" : "Sound off";
-  }
-}
-updateCaption(); // Update caption on page load
-
 toggleDiv.addEventListener("click", handleMusicBg);
-window.addEventListener("resize", updateCaption);
 
 //======================
 // FOOTER - CURRENT YEAR

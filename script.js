@@ -92,7 +92,7 @@ function updateGrid() {
       '<img src="./images/alien.png" class="alien" alt="alien" />';
   } else {
     // Display the rover image
-    roverCell.innerHTML = `<img src="./images/mars-rover.png" class="rover" alt="rover" />`;
+    roverCell.innerHTML = `<img src="./images/rover.png" class="rover" alt="rover" />`;
 
     // Apply rotation based on the rover direction
     const roverImg = roverCell.querySelector(".rover"); // Select the rover image element from the current cell where it is located

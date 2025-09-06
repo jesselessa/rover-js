@@ -1,7 +1,6 @@
-// Set grid size
-const GRID_SIZE = 10; // 10x10 grid
-
 // Global variables related to game logic
+const GRID_SIZE = 8; // Set a 8x8 grid
+
 const startButton = document.querySelector("#start");
 const gameRules = document.querySelector("#game-rules");
 const grid = document.querySelector("#board-grid");
@@ -18,6 +17,8 @@ let timerId; // ID returned by setTimeout
 // =======================
 // CREATE AND UPDATE GRID
 // =======================
+
+grid.style.setProperty("--grid-size", GRID_SIZE);
 
 // Initialize rover state
 const rover = {
@@ -46,6 +47,7 @@ function displayInitialGrid() {
 
 // Generate grid
 function initGrid() {
+  // Create cells
   for (let r = 0; r < GRID_SIZE; r++) {
     for (let c = 0; c < GRID_SIZE; c++) {
       const cell = document.createElement("div");
@@ -53,6 +55,10 @@ function initGrid() {
       grid.appendChild(cell);
     }
   }
+
+  // Configure CSS
+  grid.style.gridTemplateColumns = `repeat(${GRID_SIZE}, 1fr)`;
+  grid.style.gridTemplateRows = `repeat(${GRID_SIZE}, 1fr)`;
 }
 
 // Update grid and info
@@ -545,16 +551,26 @@ window.addEventListener("resize", handleScreenSize);
 const backgroundMusic = document.querySelector("#background-music");
 const toggleDiv = document.querySelector("#toggle");
 const toggleMusicBtn = document.querySelector("#toggle-music");
+const caption = document.querySelector("figcaption");
 
 function handleMusicBg() {
   if (backgroundMusic.paused) {
     backgroundMusic.play();
     toggleMusicBtn.src = "./images/sound-off.png";
+    updateCaption();
   } else {
     backgroundMusic.pause();
     toggleMusicBtn.src = "./images/sound-on.png";
+    updateCaption();
   }
 }
+
+// Update caption on page load
+function updateCaption() {
+  caption.textContent = backgroundMusic.paused ? "Sound on" : "Sound off";
+}
+updateCaption();
+
 toggleDiv.addEventListener("click", handleMusicBg);
 
 //======================

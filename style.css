@@ -74,25 +74,27 @@ h1 {
 /* Game board and commands */
 #board-grid {
   display: grid;
-  grid-template-columns: repeat(10, 50px);
   font-family: "Orbitron bold";
-  gap: 5px;
+  gap: 3px;
+  width: 80vw; /* Responsive */
+  max-width: 500px; /* For larger screens */
+  aspect-ratio: 1 / 1; /* Keep a square shape */
 }
 
 .cell {
-  width: 50px;
-  height: 50px;
-  font-size: 30px;
-  color: darkred;
   background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
+  /* font-size: 30px; */
+  /* color: darkred; */ /* When we had letters instead of rover image */
 }
 
-.rover {
-  width: 32px;
-  height: 32px;
+/* Rover or alien */
+.cell img {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
 }
 
 .alien {
